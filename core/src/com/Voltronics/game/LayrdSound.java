@@ -17,11 +17,12 @@ import java.util.LinkedList;
 import com.badlogic.gdx.assets.AssetManager;
 
 public class LayrdSound implements LayrdComponent {
+	private static final LayrdComponentType type = LayrdComponentType.SOUND;
 	private Deque<LayrdEvent> events;
 	private AssetManager manager;
 	
 	@Override
-	public void receiveEvent(LayrdEvent event) {
+	public void handleEvent(LayrdEvent event) {
 		events.add(event);
 	}
 
@@ -31,16 +32,21 @@ public class LayrdSound implements LayrdComponent {
 	}
 
 	@Override
-	public void onStartup() {
+	public void create() {
 		// TODO Auto-generated method stub
 		events = new LinkedList<LayrdEvent>();
 		manager = new AssetManager();
 	}
 
 	@Override
-	public void onShutdown() {
+	public void dispose() {
 		// TODO Auto-generated method stub
 		// Clean up all used resources
 		manager.dispose();
+	}
+
+	@Override
+	public LayrdComponentType getType() {
+		return type;
 	}
 }

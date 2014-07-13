@@ -4,8 +4,9 @@
 package com.Voltronics.game;
 
 public interface LayrdComponent {
-	public void receiveEvent(LayrdEvent event);
+	public LayrdComponentType getType();
+	public void handleEvent(LayrdEvent event);
 	public void run();
-	public void onStartup();
-	public void onShutdown();
+	public void create();
+	public void dispose();
 }

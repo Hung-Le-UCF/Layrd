@@ -4,9 +4,10 @@
 package com.Voltronics.game;
 
 public class LayrdGraphics implements LayrdComponent {
+	private final static LayrdComponentType type = LayrdComponentType.GRAPHICS;
 	
 	@Override
-	public void receiveEvent(LayrdEvent event) {
+	public void handleEvent(LayrdEvent event) {
 		/* there should be no events needed by graphics */
 	}
 
@@ -18,15 +19,20 @@ public class LayrdGraphics implements LayrdComponent {
 	}
 	
 	@Override
-	public void onStartup() {
+	public void create() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void onShutdown() {
+	public void dispose() {
 		// TODO Auto-generated method stub
 		// Clean up all used resources
+	}
+
+	@Override
+	public LayrdComponentType getType() {
+		return type;
 	}
 
 }

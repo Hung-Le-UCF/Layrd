@@ -3,23 +3,39 @@
  */
 package com.Voltronics.game;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class LayrdEventBus {
-	private Map<LayrdComponentType, LayrdComponent> subscribers;
+	private Map<LayrdEventType, List<LayrdComponent>> eventSubscribers;
 	
 	public LayrdEventBus() {
-		subscribers = new HashMap<LayrdComponentType, LayrdComponent>();
+		eventSubscribers = new HashMap<LayrdEventType, List<LayrdComponent>>();
 	}
 	
-	public void subscribe(LayrdComponent component, LayrdComponentType type) {
-		subscribers.put(type, component);
+	public void subscribe(LayrdComponent component, LayrdEventType type) {
+		if (!eventSubscribers.containsKey(type)) {
+			eventSubscribers.put(type, new ArrayList<LayrdComponent>());
+		}
+		
+		List<LayrdComponent> subscribers = eventSubscribers.get(type);
+		subscribers.add(component);
 	}
 	
 	public void publish(LayrdEvent event) {
-		LayrdComponentType type = event.getTargetComponent();
-		LayrdComponent subscriber = subscribers.get(type);
-		subscriber.receiveEvent(event);
+		LayrdEventType type = event.getType();
+		List<LayrdComponent> subscribers = eventSubscribers.get(type);
+		for (LayrdComponent subscriber : subscribers) {
+			subscriber.handleEvent(event);
+		}
+	}
+	
+	public void dispose() {
+		for (List<LayrdComponent> list : eventSubscribers.values()) {
+			list.clear();
+		}
+		eventSubscribers.clear();
 	}
 }
