@@ -11,42 +11,61 @@
  */
 package com.Voltronics.game;
 
-import java.util.Deque;
-import java.util.LinkedList;
+import java.util.HashMap;
+import java.util.Map;
 
-import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 
-public class LayrdSound implements LayrdComponent {
-	private static final LayrdComponentType type = LayrdComponentType.SOUND;
-	private Deque<LayrdEvent> events;
-	private AssetManager manager;
+
+public class LayrdSound {
+	private Map<String, Sound> soundManager;
+	private Map<String, Sound> musicManager;
 	
-	@Override
-	public void handleEvent(LayrdEvent event) {
-		events.add(event);
+	public LayrdSound() {
+		soundManager = new HashMap<String, Sound>();
+		musicManager = new HashMap<String, Sound>();
 	}
 
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub
+	public void loadSounds(String[] keys, String[] paths){
+		for(int i = 0; i < paths.length; i++)
+			loadSound(keys[i], paths[i]);
 	}
-
-	@Override
-	public void create() {
-		// TODO Auto-generated method stub
-		events = new LinkedList<LayrdEvent>();
-		manager = new AssetManager();
+	
+	public void loadSound(String key, String path){
+		soundManager.put(key, Gdx.audio.newSound(Gdx.files.internal(path)));
 	}
-
-	@Override
-	public void dispose() {
-		// TODO Auto-generated method stub
-		// Clean up all used resources
-		manager.dispose();
+	
+	
+	public Sound getSound(String soundName){
+		if(soundManager.containsKey(soundName)){
+			return soundManager.get(soundName);
+		}
+		
+		// no sound found, return null?
+		return null;
 	}
-
-	@Override
-	public LayrdComponentType getType() {
-		return type;
+	
+	
+	public void loadMusics(String[] keys, String[] paths){
+		for(int i = 0; i < paths.length; i++)
+			loadMusic(keys[i], paths[i]);
 	}
+	
+	public void loadMusic(String key, String path){
+		musicManager.put(key, Gdx.audio.newSound(Gdx.files.internal(path)));
+	}
+	
+	
+	public Sound getMusic(String soundName){
+		if(musicManager.containsKey(soundName)){
+			return musicManager.get(soundName);
+		}
+		
+		// no sound found, return null?
+		return null;
+	}
+	
+	
+	
 }

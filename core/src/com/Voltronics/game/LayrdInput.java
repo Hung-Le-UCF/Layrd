@@ -7,8 +7,7 @@ package com.Voltronics.game;
 
 import com.badlogic.gdx.InputProcessor;
 
-public class LayrdInput implements InputProcessor, LayrdComponent {
-	private final static LayrdComponentType type = LayrdComponentType.INPUT;
+public class LayrdInput implements InputProcessor {
 	
 	@Override
 	public boolean keyDown(int keycode) {
@@ -56,33 +55,6 @@ public class LayrdInput implements InputProcessor, LayrdComponent {
 	public boolean scrolled(int amount) {
 		// TODO Auto-generated method stub
 		return false;
-	}
-
-	@Override
-	public void handleEvent(LayrdEvent event) {
-		/* no point for input to receive 'input' events */
-	}
-
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void create() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void dispose() {
-		// TODO Auto-generated method stub
-		// Clean up all used resources
-	}
-
-	@Override
-	public LayrdComponentType getType() {
-		return type;
 	}
 
 }

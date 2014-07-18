@@ -3,36 +3,66 @@
  */
 package com.Voltronics.game;
 
-public class LayrdGraphics implements LayrdComponent {
-	private final static LayrdComponentType type = LayrdComponentType.GRAPHICS;
-	
-	@Override
-	public void handleEvent(LayrdEvent event) {
-		/* there should be no events needed by graphics */
-	}
+import java.util.HashMap;
+import java.util.Map;
 
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-		// Graphics stuff
-		// Clean up all used resources
-	}
+
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+//import com.badlogic.gdx.scenes.scene2d.ui.List;
+
+public class LayrdGraphics {
+
+	private Map<String, Texture> spritesManager;
+	private Map<String, Texture> BGsManager;
 	
-	@Override
-	public void create() {
-		// TODO Auto-generated method stub
+	
+	public LayrdGraphics(){
+		spritesManager = new HashMap<String, Texture>();
+		BGsManager = new HashMap<String, Texture>();
+		
 		
 	}
-
-	@Override
-	public void dispose() {
-		// TODO Auto-generated method stub
-		// Clean up all used resources
+	
+	public void loadSprites(String[] keys, String[] paths){
+		for(int i = 0; i < paths.length; i++)
+			loadSprite(keys[i], paths[i]);
 	}
-
-	@Override
-	public LayrdComponentType getType() {
-		return type;
+	
+	public void loadSprite(String key, String path){
+		spritesManager.put(key, new Texture( Gdx.files.internal(path) ));
 	}
-
+	
+	
+	public Texture getSprite(String spriteName){
+		if(spritesManager.containsKey(spriteName)){
+			return spritesManager.get(spriteName);
+		}
+		
+		// no texture found, return null? or return plain texture
+		return null;
+		//return new Texture("");
+	}
+	
+	
+	public void loadBGs(String[] keys, String[] paths){
+		for(int i = 0; i < paths.length; i++)
+			loadBG(keys[i], paths[i]);
+	}
+	
+	public void loadBG(String key, String path){
+		BGsManager.put(key, new Texture( Gdx.files.internal(path) ));
+	}
+	
+	
+	public Texture getBG(String spriteName){
+		if(BGsManager.containsKey(spriteName)){
+			return BGsManager.get(spriteName);
+		}
+		
+		// no texture found, return null? or return plain texture
+		return null;
+		//return new Texture("");
+	}
 }
