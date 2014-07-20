@@ -5,10 +5,6 @@
  */
 package com.Voltronics.game;
 
-import java.util.Deque;
-import java.util.LinkedList;
-
-import com.badlogic.gdx.math.Vector2;
 
 public class LayrdLogic {
 	
