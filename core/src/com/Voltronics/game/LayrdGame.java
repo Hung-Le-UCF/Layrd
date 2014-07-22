@@ -12,11 +12,11 @@ public class LayrdGame extends Game {
 	@Override
 	public void create() {
 
+		System.out.println("Game Create");
 		
-
 		
-		setScreen(new LayrdScreenMainMenu());
-		
+		//setScreen(new LayrdScreenMainMenu());
+		setScreen(new LayrdScreenGame(this));
 	}
 	
 	public void playing(){

@@ -1,7 +1,9 @@
 package com.Voltronics.game;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 
 public class LayrdScreenGame implements Screen{
 
@@ -13,16 +15,10 @@ public class LayrdScreenGame implements Screen{
 	
 	SpriteBatch batch;
 	
+	
+	
 	public LayrdScreenGame(LayrdGame game){
 		this.game = game;
-		state = gameState.READY;
-		
-		batch = new SpriteBatch();
-		//world = new LayrdWorld();
-		
-		
-		
-		
 		
 	}
 	
@@ -35,26 +31,34 @@ public class LayrdScreenGame implements Screen{
 	
 	@Override
 	public void render(float delta) {
-		// TODO Auto-generated method stub
+		
+		// update game world
+		// world.stateMachine(Gdx.graphics.getDeltaTime());
+		world.stateMachine(delta);
+		
 		
 	}
 
 	@Override
 	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
-		
+		world.camera.viewportWidth = width / 2.5f;
+		world.camera.viewportHeight = height / 2.5f;
 	}
 
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
+		state = gameState.READY;
 		
+		//batch = new SpriteBatch();
+		world = new LayrdWorld("testMap.tmx");
+		
+
 	}
 
 	@Override
 	public void hide() {
-		// TODO Auto-generated method stub
-		
+		dispose();
 	}
 
 	@Override
@@ -71,8 +75,7 @@ public class LayrdScreenGame implements Screen{
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
-		
+		world.dispose();
 	}
 
 }

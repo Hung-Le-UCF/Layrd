@@ -8,8 +8,10 @@ import java.util.Map;
 
 
 
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 //import com.badlogic.gdx.scenes.scene2d.ui.List;
 
 public class LayrdGraphics {
@@ -22,7 +24,7 @@ public class LayrdGraphics {
 		spritesManager = new HashMap<String, Texture>();
 		BGsManager = new HashMap<String, Texture>();
 		
-		
+		System.out.println("Graphics Loaded");
 	}
 	
 	public void loadSprites(String[] keys, String[] paths){
@@ -35,14 +37,19 @@ public class LayrdGraphics {
 	}
 	
 	
-	public Texture getSprite(String spriteName){
+	public Texture getSpriteTexture(String spriteName){
 		if(spritesManager.containsKey(spriteName)){
+			//System.out.println("Sprite Found");
 			return spritesManager.get(spriteName);
 		}
 		
-		// no texture found, return null? or return plain texture
-		return null;
+		// no texture found, return plain texture
+		return new Texture("");
 		//return new Texture("");
+	}
+	
+	public Sprite getSprite(String spriteName){
+		return new Sprite(getSpriteTexture(spriteName));
 	}
 	
 	
@@ -61,8 +68,8 @@ public class LayrdGraphics {
 			return BGsManager.get(spriteName);
 		}
 		
-		// no texture found, return null? or return plain texture
-		return null;
+		// no texture found, return plain texture
+		return new Texture("");
 		//return new Texture("");
 	}
 }
