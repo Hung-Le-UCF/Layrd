@@ -26,7 +26,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
-public class LayrdWorld implements GestureListener{
+public class LayrdWorld implements GestureListener, ContactListener{
 
 	public enum worldState{READY, PLAYING, PAUSED, LEVELFINISH, GAMEOVER}
 	public worldState state = worldState.READY;
@@ -42,7 +42,7 @@ public class LayrdWorld implements GestureListener{
 	private TiledMap map;
 	private TiledMapTileLayer collisionLayer;
 
-	private ListenerClass listener;
+	//private ListenerClass listener;
 	private Body playerBody;
 
 	private float tileSize;
@@ -95,9 +95,9 @@ public class LayrdWorld implements GestureListener{
 
 		world = new World(new Vector2(0, 0), true);
 		b2dr = new Box2DDebugRenderer();
-		listener = new ListenerClass();
+		//listener = new ListenerClass();
 
-		world.setContactListener(listener);
+		world.setContactListener(this);
 		
 
 		// TODO LayrdInput is not completed
@@ -236,6 +236,7 @@ public class LayrdWorld implements GestureListener{
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+		System.out.println(world.getContactCount());
 
 		// update camera and player position
 		camera.position.set(mapX, player.position.y + player.rectBounds.height, 0);
@@ -301,7 +302,7 @@ public class LayrdWorld implements GestureListener{
 
 
 
-	class ListenerClass implements ContactListener {
+
 
 		@Override
 		public void beginContact(Contact contact) {
@@ -338,7 +339,6 @@ public class LayrdWorld implements GestureListener{
 
 		}
 
-	}
 
 
 

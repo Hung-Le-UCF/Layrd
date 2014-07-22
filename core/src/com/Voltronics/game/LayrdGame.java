@@ -13,10 +13,10 @@ public class LayrdGame extends Game {
 	public void create() {
 
 		System.out.println("Game Create");
+		Assets.load();
 		
-		
-		//setScreen(new LayrdScreenMainMenu());
-		setScreen(new LayrdScreenGame(this));
+		setScreen(new LayrdScreenMainMenu(this));
+		//setScreen(new LayrdScreenGame(this));
 	}
 	
 	public void playing(){
