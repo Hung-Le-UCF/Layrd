@@ -8,12 +8,13 @@ import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.input.GestureDetector.GestureListener;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.ChainShape;
 import com.badlogic.gdx.physics.box2d.Contact;
@@ -24,7 +25,6 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
 public class LayrdWorld implements GestureListener, ContactListener{
 
@@ -72,7 +72,7 @@ public class LayrdWorld implements GestureListener, ContactListener{
 
 	private void playerInitialize(){	
 		// initialize player and game objects (if any)
-
+		
 		// TODO replace player hard-coded number with variables (screen size OR pre-defined constants)
 		player = new Player(50, 800 / 2 - 64 / 2, 50, 128);
 
@@ -121,7 +121,8 @@ public class LayrdWorld implements GestureListener, ContactListener{
 		renderer = new OrthogonalTiledMapRenderer(map);
 		camera = new OrthographicCamera();
 
-
+		camera.zoom *= 2.5f;
+		
 		// initialize map
 		collisionLayer = (TiledMapTileLayer) map.getLayers().get(1);
 
@@ -298,6 +299,9 @@ public class LayrdWorld implements GestureListener, ContactListener{
 		map.dispose();
 		renderer.dispose();
 		b2dr.dispose();
+		world.dispose();
+		player.sprite.getTexture().dispose();
+		
 	}
 
 

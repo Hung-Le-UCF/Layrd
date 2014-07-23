@@ -27,6 +27,6 @@ public class LayrdGame extends Game {
 	
 	@Override
 	public void dispose() {
-		mainMenu.dispose();
+
 	}
 }
