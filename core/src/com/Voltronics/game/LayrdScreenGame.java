@@ -75,7 +75,8 @@ public class LayrdScreenGame implements Screen{
 
 	@Override
 	public void dispose() {
-		world.dispose();
+
+        world.dispose();
 	}
 
 }

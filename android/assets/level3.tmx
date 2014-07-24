@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="200" height="40" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="cloudTiles" tilewidth="32" tileheight="32">
+  <image source="cloudTiles.png" width="2048" height="1536"/>
+ </tileset>
+ <layer name="background" width="200" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt0zERw0AAxMCn7TCz0cV90uuKLTSLQNc55/N2kfzxfntI/rX+k1y2/pNctv6TXLb+k1y2/pNctv6TXLb+k1y2/pNctv6TXLb+k1y2/pNctv6TXLb+k1y2/pNctv6TXLb+k1y2/pNctv6TXLb+k1y2/pNctv6TXLb+k1y2/pNctv6TXLb+k1y2/pNctv6TXLb+k1y2/pNctv6TXLb+k1y2/pNctv6TXLb+k1y2/pNctv6TXLb+k1y2/pNc9gtQ1L3v
+  </data>
+ </layer>
+ <layer name="obstacles" width="200" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztlslKBEEMQPvgHAT1NG6fJIyeXG+u//8L5iI1FHabsis1SXgPAkV3V7bhwWyPpulc4kLiUuJK4lpiy3OeJ36u/e5e4kHiUeJJ4lnipeH562aa3iTeJT4kPiW+NuX7NczlBhsOse/sv7HlfNl35w386A9+5AE/+oMfecCP/uBHHvCjP/iRB/zoD34UovVbgx/9wY9CtH5r8KM/+FGI1m8NfvQHPwrR+q3Bj/7gRyFavzX40R/8KETrtwY/YhFtd9H6rcGPWETbXbR+a/AjFha7y/R/sHe9rH5kdRA/xtbDD8CPcfm81MQPPfgxLp+XmvihBz/G5fNSEz/04Me4fF5q4oce/BiXz0tN/NCDH+PyeamJH3rwY1w+LzXxQw9+jMvnpSZ+6MEPX+CHL/DDF/ihZ8QM+OEL/NCDH77rWYAfevDDdz0L8ENPdD9Gk2EW/NCDH21kmsWSLHvCjzYyzWJJlj3hRxuZZrEky57wo41Ms1iSZU/40UamWSzJsif8aCPTLJZk2RN+tJFpFkvW7OlE4lTirDofL7zbP8+hvb9//m2Glvua/ud29d/51+5vzf2lWbz0f8j9/Jzn9qS5v5O4lbirzjcL7zRn7nN/F6C/v777BuIwJVo=
+  </data>
+ </layer>
+ <layer name="end" width="200" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt0zENACAAwDBu/KtBHQcnWUBAm0zCxgCAf2uegJs/oPkDmj+g+QOaP6D5A5o/oPkDmj+g+QOaP6D5A5o/oPkDmj+g+QOaP6D5A5o/oPkDmj+g+QOaP6D5A5o/oPkDmj+g+QOaP6D5A5o/oPkDmj+g+QOaP6D5A5o/4G0DdAw6MQ==
+  </data>
+ </layer>
+</map>
