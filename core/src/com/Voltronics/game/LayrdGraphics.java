@@ -16,54 +16,47 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public class LayrdGraphics {
 
-	private Map<String, Texture> spritesManager;
-	private Map<String, Texture> BGsManager;
+	private static Map<String, Texture> spritesManager = new HashMap<String, Texture>();
+	private static Map<String, Texture> BGsManager = new HashMap<String, Texture>();;
 	
 	
-	public LayrdGraphics(){
-		spritesManager = new HashMap<String, Texture>();
-		BGsManager = new HashMap<String, Texture>();
-		
-		System.out.println("Graphics Loaded");
-	}
-	
-	public void loadSprites(String[] keys, String[] paths){
+	public static void loadSprites(String[] keys, String[] paths){
 		for(int i = 0; i < paths.length; i++)
 			loadSprite(keys[i], paths[i]);
 	}
 	
-	public void loadSprite(String key, String path){
+	public static void loadSprite(String key, String path){
 		spritesManager.put(key, new Texture( Gdx.files.internal(path) ));
 	}
 	
 	
-	public Texture getSpriteTexture(String spriteName){
-		if(spritesManager.containsKey(spriteName)){
-			//System.out.println("Sprite Found");
-			return spritesManager.get(spriteName);
+	public static Texture getTexture(String textureName){
+		if(spritesManager.containsKey(textureName)){
+			return spritesManager.get(textureName);
 		}
 		
 		// no texture found, return plain texture
+		System.out.println("Texture: " + textureName + " cannot be found");
 		return new Texture("");
 		//return new Texture("");
 	}
 	
-	public Sprite getSprite(String spriteName){
-		return new Sprite(getSpriteTexture(spriteName));
+	public static Sprite getSprite(String spriteName){
+		return new Sprite(getTexture(spriteName));
 	}
 	
 	
-	public void loadBGs(String[] keys, String[] paths){
+	public static void loadBGs(String[] keys, String[] paths){
 		for(int i = 0; i < paths.length; i++)
 			loadBG(keys[i], paths[i]);
 	}
 	
-	public void loadBG(String key, String path){
+	public static void loadBG(String key, String path){
 		BGsManager.put(key, new Texture( Gdx.files.internal(path) ));
 	}
 	
 	
-	public Texture getBG(String spriteName){
+	public static Texture getBG(String spriteName){
 		if(BGsManager.containsKey(spriteName)){
 			return BGsManager.get(spriteName);
 		}

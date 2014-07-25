@@ -19,45 +19,40 @@ import com.badlogic.gdx.audio.Sound;
 
 
 public class LayrdSound {
-	private Map<String, Sound> soundManager;
-	private Map<String, Sound> musicManager;
+	private static Map<String, Sound> soundManager = new HashMap<String, Sound>();
+	private static Map<String, Sound> musicManager = new HashMap<String, Sound>();
 	
-	public LayrdSound() {
-		soundManager = new HashMap<String, Sound>();
-		musicManager = new HashMap<String, Sound>();
-	}
-
-	public void loadSounds(String[] keys, String[] paths){
+	
+	public static void loadSounds(String[] keys, String[] paths){
 		for(int i = 0; i < paths.length; i++)
 			loadSound(keys[i], paths[i]);
 	}
 	
-	public void loadSound(String key, String path){
+	public static void loadSound(String key, String path){
 		soundManager.put(key, Gdx.audio.newSound(Gdx.files.internal(path)));
 	}
 	
 	
-	public Sound getSound(String soundName){
+	public static Sound getSound(String soundName){
 		if(soundManager.containsKey(soundName)){
 			return soundManager.get(soundName);
 		}
 		
-		// no sound found, return null?
 		return null;
 	}
 	
 	
-	public void loadMusics(String[] keys, String[] paths){
+	public static void loadMusics(String[] keys, String[] paths){
 		for(int i = 0; i < paths.length; i++)
 			loadMusic(keys[i], paths[i]);
 	}
 	
-	public void loadMusic(String key, String path){
+	public static void loadMusic(String key, String path){
 		musicManager.put(key, Gdx.audio.newSound(Gdx.files.internal(path)));
 	}
 	
 	
-	public Sound getMusic(String soundName){
+	public static Sound getMusic(String soundName){
 		if(musicManager.containsKey(soundName)){
 			return musicManager.get(soundName);
 		}
