@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="200" height="40" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="iceTileSet" tilewidth="32" tileheight="32">
+  <image source="tileSet.png" width="2048" height="1536"/>
+  <tile id="577">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="578">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="579">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="580">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="641">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="642">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="643">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="644">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="779">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="780">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="781">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="782">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="2334">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="2335">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="2336">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="2337">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="2398">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="2399">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="2400">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="2401">
+   <properties>
+    <property name="blocked" value=""/>
+   </properties>
+  </tile>
+  <tile id="3004">
+   <properties>
+    <property name="nextLevel" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="backGround" width="200" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt08ENwkAAA8GTUjx0BmVBAcnb+xhL1lSw55jZ0z7XOd+L5J2v/98kb133SZZd90mWXfdJll33SZZd90mWXfdJll33SZZd90mWXfdJll33SZZd90mWXfdJll33SZZd90mWXfdJll33SZZd90mWXfdJll33SZZd90mWXfdJll33SZZd90mWXfdJll33SZZd90mWXfdJll33SZZd90mWXfdJll33SZZd90mWXfdJll33SZZd90mWXfdJljWz5/0AI87G1g==
+  </data>
+ </layer>
+ <layer name="obstacles" width="200" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztmF1OxDAMhCt4WomfK8BVOAnc/xK0qso+oN2NXY8zTmakClXqOo7jyZfw8rwsr+vztj7v6/Oid73r/e/9kb4vy/Jzuf6NlDc2MqeocdE59qoBg5jm/rGO/3m5/mWIjczpnpj80asGDGLyh/jhGxfdv0w9ki2muYsfV4kfHGLyh/jhG1f8wIlp7jPwo7XeTPxg6pFsMc3dmktGD0XXp9Vv1f2R1VeMc0fJulcfObd8L3745alB1p1lJn9YczlqL37w9Yj40T8XCz+ycoqKx+QP8YPDH9aaWviRlVNUPCZ/iB8c/kDez7NyiorH5A/PHiF/xMt7P5+dH2h5ctH5qn8uljVguZ8j+IEWmh9n5srITpSQ5yvvPHv1KZM/0Pw404Mz8cN7P0fyo9f+UXldNokf8RI/fOMy7qEZa3P2ty2qvk+1amR+MO6hGWw/+9tqQs515Ps54x6a5W+m8w9aSH+wnK9a82Dih0ej3M+ZNMP5ioUfTHeWmXr8jKrzo+VbFn4w9WTGGYlpvozK4EfLt615oO+3TP2SkQvTfLPEVteWbxHnK08dmO61bOs4ipjWuDWf1pxn4sdo5yuW2rLkYclH/Piv0fjB0pdMa7ypV11G50dEriP4wxqXaY039fJrdX88ykX+2GXtLzYuV+IHG3vvKSLXEfxhjZuxxtH/30WoOj8eSfzYheSHN+dR+VHJH+KHL27G3l6BH55xK/lD/Nglfvg0Oj/kD2zcTYfnkP6odOdF1jo6tvyxC9lfR67I89Vse/ItRa9jRK6ZexdqLMY9rVLPW8RYa2Q88QMTu9KZySLxAyfxo74Ya42MV4EfX0969Oi59fwCiScYJQ==
+  </data>
+ </layer>
+ <layer name="end" width="200" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt07ENwCAAA0H67D9OdqNIGb1AtNxJ3sA/BgDse59vwJ8+oOkDmj6g6QOaPqDpA5o+oOkDmj6g6QOaPqDpA5o+oOkDmj6g6QPaaR+64gb6gKYPaPqApg9o+oCmD2j6gKYPaPqApg9o+oCmD2h+Dk0f0PQBTR/Q9AFNH9D0AU0fsDYBQPVPsQ==
+  </data>
+ </layer>
+</map>
