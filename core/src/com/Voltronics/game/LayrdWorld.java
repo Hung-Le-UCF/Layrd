@@ -9,6 +9,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.input.GestureDetector;
+import com.badlogic.gdx.input.GestureDetector.GestureListener;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
@@ -29,7 +31,7 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
-public class LayrdWorld extends Game implements ContactListener, Screen{
+public class LayrdWorld extends Game implements ContactListener, Screen, GestureListener{
 
 	public enum worldState{READY, PLAYING, PAUSED, LEVELFINISH, GAMEOVER, LOADINGMENU}
 	public worldState state = worldState.READY;
@@ -135,8 +137,8 @@ public class LayrdWorld extends Game implements ContactListener, Screen{
 
         // TODO LayrdInput is not completed
         //gestureDect = new GestureDetector(new LayrdInput());
-        //gestureDect = new GestureDetector(this);
-        //Gdx.input.setInputProcessor(gestureDect);
+        GestureDetector gestureDect = new GestureDetector(this);
+        Gdx.input.setInputProcessor(gestureDect);
 
 
         //  loads level depending on difficulty
@@ -473,7 +475,7 @@ public class LayrdWorld extends Game implements ContactListener, Screen{
 
 
     }
-/*
+
 	public boolean updatePlayer(float deltaX, float deltaY){
 		float tempY;
 
@@ -492,7 +494,7 @@ public class LayrdWorld extends Game implements ContactListener, Screen{
 		}
 
 		return true;
-	}*/
+	}
 
     @Override
     public void create() {
@@ -580,7 +582,7 @@ public class LayrdWorld extends Game implements ContactListener, Screen{
         // TODO Auto-generated method stub
 
     }
-/*
+
 	@Override
 	public boolean touchDown(float x, float y, int pointer, int button) {
 		// TODO Auto-generated method stub
@@ -630,5 +632,5 @@ public class LayrdWorld extends Game implements ContactListener, Screen{
 			Vector2 pointer1, Vector2 pointer2) {
 		// TODO Auto-generated method stub
 		return false;
-	}*/
+	}
 }
