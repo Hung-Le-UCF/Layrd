@@ -27,7 +27,8 @@ public class LayrdScreenMainMenu implements Screen {
 	
 	public LayrdScreenMainMenu(LayrdGame aGame)
 	{
-		game = aGame;
+		System.out.println("mainmenu Loaded");
+        game = aGame;
 		guiCam = new OrthographicCamera(480,320);
 		//guiCam.setToOrtho(true);
 		guiCam.position.set(480/2,320/2,0);
@@ -75,7 +76,7 @@ public class LayrdScreenMainMenu implements Screen {
 		update(delta);
 		
 		// TODO Auto-generated method stub
-		Gdx.gl.glClearColor(1, 0, 0, 1);
+		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		guiCam.update();
 		batch.setProjectionMatrix(guiCam.combined);

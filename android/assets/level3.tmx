@@ -10,7 +10,7 @@
  </layer>
  <layer name="obstacles" width="200" height="40">
   <data encoding="base64" compression="zlib">
-   eJztlslKBEEMQPvgHAT1NG6fJIyeXG+u//8L5iI1FHabsis1SXgPAkV3V7bhwWyPpulc4kLiUuJK4lpiy3OeJ36u/e5e4kHiUeJJ4lnipeH562aa3iTeJT4kPiW+NuX7NczlBhsOse/sv7HlfNl35w386A9+5AE/+oMfecCP/uBHHvCjP/iRB/zoD34UovVbgx/9wY9CtH5r8KM/+FGI1m8NfvQHPwrR+q3Bj/7gRyFavzX40R/8KETrtwY/YhFtd9H6rcGPWETbXbR+a/AjFha7y/R/sHe9rH5kdRA/xtbDD8CPcfm81MQPPfgxLp+XmvihBz/G5fNSEz/04Me4fF5q4oce/BiXz0tN/NCDH+PyeamJH3rwY1w+LzXxQw9+jMvnpSZ+6MEPX+CHL/DDF/ihZ8QM+OEL/NCDH77rWYAfevDDdz0L8ENPdD9Gk2EW/NCDH21kmsWSLHvCjzYyzWJJlj3hRxuZZrEky57wo41Ms1iSZU/40UamWSzJsif8aCPTLJZk2RN+tJFpFkvW7OlE4lTirDofL7zbP8+hvb9//m2Glvua/ud29d/51+5vzf2lWbz0f8j9/Jzn9qS5v5O4lbirzjcL7zRn7nN/F6C/v777BuIwJVo=
+   eJztlslKQ0EQRd/C/EGcPkmIrhx3jv//C9ZGGhqM1aSrrbqcAxfCy0tNcsD92badWy4sl5Yry7Vlz3OeCz/3vndvebA8Wp4sz5aXgeevu217s7xbPiyflq9de/8UfqsNMfzHvdX/xpH7qd8uG/gxH/zQAT/mgx864Md88EMH/JgPfuiAH/PBj0a1eXvwYz740ag2bw9+zAc/GtXm7cGP+eBHo9q8PfgxH/xoVJu3Bz/mgx+NavP24Ectqt2u2rw9+FGLarerNm8PftQi4nZK/w/O7qfqh6qD+LG2H34Afqyrl6UnfvjBj3X1svTEDz/4sa5elp744Qc/1tXL0hM//ODHunpZeuKHH/xYVy9LT/zwgx/r6mXpiR9+8GNdvSw98cMPfuQCP3KBH7nADz8rdsCPXOCHH/zI3S8C/PCDH7n7RYAffqr7sRqFXfDDD36MobRLJCp3wo8xlHaJROVO+DGG0i6RqNwJP8ZQ2iUSlTvhxxhKu0Sicif8GENpl0hU7oQfYyjtEonKnVbtoHCrH5R2ieIUPw6WW8td9/nmyHeez/ye3x8KzPfXe99ftRwO
   </data>
  </layer>
  <layer name="end" width="200" height="40">

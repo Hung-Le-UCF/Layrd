@@ -2,14 +2,13 @@ package com.Voltronics.game;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.input.GestureDetector;
-import com.badlogic.gdx.input.GestureDetector.GestureListener;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
@@ -30,12 +29,14 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
-public class LayrdWorld extends Game implements ContactListener{
+public class LayrdWorld extends Game implements ContactListener, Screen{
 
-	public enum worldState{READY, PLAYING, PAUSED, LEVELFINISH, GAMEOVER}
+	public enum worldState{READY, PLAYING, PAUSED, LEVELFINISH, GAMEOVER, LOADINGMENU}
 	public worldState state = worldState.READY;
 
 	private Player player;
+
+    LayrdGame aGame;
 
 	////////////////////////////////////////////////////////
 	public OrthogonalTiledMapRenderer renderer;
@@ -49,8 +50,7 @@ public class LayrdWorld extends Game implements ContactListener{
 	private Body playerBody;
     private Body endingBody;
 
-	private float tileSize;
-	private float mapX;
+    private float mapX;
 
     private float difficulty;
 
@@ -59,14 +59,15 @@ public class LayrdWorld extends Game implements ContactListener{
     private SpriteBatch batcher;
 	/////////////////////////////////////////////////////////
 
-
-	private GestureDetector gestureDect;
-
 	private LayrdGraphics graphicsLib;
 	private LayrdSound soundsLib;
 	private LayrdLogic gameLogic;
 
-	public LayrdWorld(String tileMapDirectory){
+    boolean panRunning;
+
+	public LayrdWorld(LayrdGame game){
+
+        this.aGame = game;
 
         //stateMachine();
 		// must initiate component lib first
@@ -78,11 +79,8 @@ public class LayrdWorld extends Game implements ContactListener{
         batcher = new SpriteBatch();
         items = new Texture(Gdx.files.internal("items.png"));
         gameOver = new TextureRegion(items, 352, 256,160, 96);
-		gameComponentsInitialize(tileMapDirectory);
-
-
-
-
+		//gameComponentsInitialize(tileMapDirectory);
+        gameComponentsInitialize("firstLevel");
 
 	}
 
@@ -90,16 +88,20 @@ public class LayrdWorld extends Game implements ContactListener{
         // initialize player and game objects (if any)
 
         // TODO replace player hard-coded number with variables (screen size OR pre-defined constants)
-        player = new Player(50, 800 / 2 - 64 / 2, 44, 66);
+       // player = new Player(50, 800 / 2 - 64 / 2, 44, 66);
 
         //  makes player spawn at bottom of level
         //  without this there was issues with player not able to reach bottom of screen
-       // player = new Player(-100, 0, 44, 66);
+        player = new Player(0, 100, 44, 66);
+
+        System.out.println("posX "+ player.position.x);
+        System.out.println("posy "+ player.position.y);
 
         //  makes player jump to middle of screen for starting
-       // player.setPos(player.position.x, 800 / 2 - 64 / 2);
+        player.setPos(player.position.x, 800 / 2 - 64 / 2);
 
-
+        System.out.println("posX UPDATE "+ player.position.x);
+        System.out.println("posy UPDATE"+ player.position.y);
         // TODO require investigate of multiple objects using the same texture
         // be aware that the texture here is originate in graphics library
         // any direct change to texture MAY OR MAY NOT cause change to all objects using it
@@ -139,7 +141,7 @@ public class LayrdWorld extends Game implements ContactListener{
 
         //  loads level depending on difficulty
         if(map == null || difficulty == 1){
-            map = mapLoader.load("testMap.tmx");
+            map = mapLoader.load("level1.tmx");
 
         }
         else if(map != null && difficulty == 2){
@@ -189,7 +191,7 @@ public class LayrdWorld extends Game implements ContactListener{
 		// gets layer that the obstacles are in
 		TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get("obstacles");
         TiledMapTileLayer finish = (TiledMapTileLayer) map.getLayers().get("end");
-        tileSize = layer.getTileWidth();
+        float tileSize = layer.getTileWidth();
 
 
 		// creates the bodys and fixtures
@@ -232,8 +234,8 @@ public class LayrdWorld extends Game implements ContactListener{
 
 
         //  seperate fixutre around player to make interactions with ending panel
-        bdef2.position.set(player.position.x + player.rectBounds.width ,
-                player.position.y );
+        bdef2.position.set(player.position.x + player.rectBounds.width,
+                player.position.y);
 
 
         // setup player
@@ -275,8 +277,8 @@ public class LayrdWorld extends Game implements ContactListener{
 				v[0] = new Vector2(-tileSize / 2, -tileSize / 2);
 				v[1] = new Vector2(-tileSize / 2, tileSize /2);
 				v[2] = new Vector2(tileSize / 2, tileSize / 2);
-				v[3] = new Vector2(tileSize/2, -tileSize/2);
-				v[4] = new Vector2(-tileSize/2, -tileSize/2);
+				v[3] = new Vector2(tileSize /2, -tileSize /2);
+				v[4] = new Vector2(-tileSize /2, -tileSize /2);
 				cs.createChain(v);
 
 				fdef.shape = cs;
@@ -307,8 +309,8 @@ public class LayrdWorld extends Game implements ContactListener{
                 v[0] = new Vector2(-tileSize / 2, -tileSize / 2);
                 v[1] = new Vector2(-tileSize / 2, tileSize /2);
                 v[2] = new Vector2(tileSize / 2, tileSize / 2);
-                v[3] = new Vector2(tileSize/2, -tileSize/2);
-                v[4] = new Vector2(-tileSize/2, -tileSize/2);
+                v[3] = new Vector2(tileSize /2, -tileSize /2);
+                v[4] = new Vector2(-tileSize /2, -tileSize /2);
                 cs2.createChain(v);
 
                 fdef2.shape = cs2;
@@ -438,6 +440,18 @@ public class LayrdWorld extends Game implements ContactListener{
         map.dispose();
         difficulty = 0;
 
+        //batcher.dispose();
+
+        System.out.println("GameOverState");
+
+        world.destroyBody(playerBody);
+        world.destroyBody(endingBody);
+
+        if (Gdx.input.isTouched()) {
+            aGame.setScreen(new LayrdScreenMainMenu(aGame));
+        }
+
+
 
 
 
@@ -452,11 +466,11 @@ public class LayrdWorld extends Game implements ContactListener{
         //difficulty++;
         //System.out.println("waiting for nextLevel");
 
-        if(Gdx.input.isTouched()) {
-            Gdx.gl.glClearColor(0, 0, 0, 1);
-            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-            gameComponentsInitialize("newLevel");
-        }
+        Gdx.gl.glClearColor(1,0,0,1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        gameComponentsInitialize("newLevel");
+
 
     }
 /*
@@ -482,6 +496,21 @@ public class LayrdWorld extends Game implements ContactListener{
 
     @Override
     public void create() {
+
+    }
+
+    @Override
+    public void render(float delta) {
+          this.stateMachine(delta);
+    }
+
+    @Override
+    public void show() {
+
+    }
+
+    @Override
+    public void hide() {
 
     }
 

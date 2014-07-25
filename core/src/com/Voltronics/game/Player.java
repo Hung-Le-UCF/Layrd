@@ -11,6 +11,51 @@ public class Player extends GameObject implements GestureListener {
 
 	public int health;
 
+
+
+    public enum state{IDLE, MOVING, DYING};
+	public state plState = state.IDLE;
+	
+	public Player(float x, float y, float width, float height){
+
+
+        super(Math.max(x/2, x),
+				Math.max(y/2, y),
+				Math.max(1, width),
+				Math.max(1, height));
+        GestureDetector gestureDect = new GestureDetector(this);
+        Gdx.input.setInputProcessor(gestureDect);
+	}
+	
+	
+	public void setPos(float x, float y){
+		this.position.x = Math.max(this.rectBounds.x/2, x);
+		this.position.y = Math.max(this.rectBounds.y/2, y);
+		
+		sprite.setPosition(x, y);
+	}
+
+    //  method to move the player up and down
+    public boolean updatePlayer(float deltaX, float deltaY){
+        float tempY;
+
+        //player.oldPosition.y = player.position.y;
+        //going down
+        if(deltaY > 0){
+            tempY = this.position.y;
+            tempY -= deltaY;
+            this.setPos(this.position.x, tempY);
+        }
+        //going up
+        else if(deltaY < 0){
+            tempY = this.position.y;
+            tempY -= deltaY;
+            this.setPos(this.position.x, tempY);
+        }
+
+        return true;
+    }
+
     @Override
     public boolean touchDown(float x, float y, int pointer, int button) {
         return false;
@@ -31,6 +76,7 @@ public class Player extends GameObject implements GestureListener {
         return false;
     }
 
+    //  if the user pans his finger up or down it calls the method to preform movement
     @Override
     public boolean pan(float x, float y, float deltaX, float deltaY) {
         return updatePlayer(deltaX , deltaY);
@@ -50,51 +96,6 @@ public class Player extends GameObject implements GestureListener {
     public boolean pinch(Vector2 initialPointer1, Vector2 initialPointer2, Vector2 pointer1, Vector2 pointer2) {
         return false;
     }
-
-    public enum state{IDLE, MOVING, DYING};
-	public state plState = state.IDLE;
-	
-	public Player(float x, float y, float width, float height){
-
-
-        super(Math.max(width/2, x),
-				Math.max(height/2, y),
-				Math.max(1, width),
-				Math.max(1, height));
-        GestureDetector gestureDect = new GestureDetector(this);
-        Gdx.input.setInputProcessor(gestureDect);
-	}
-	
-	
-	public void setPos(float x, float y){
-		this.position.x = Math.max(this.rectBounds.x/2, x);
-		this.position.y = Math.max(this.rectBounds.y/2, y);
-		
-		sprite.setPosition(x, y);
-	}
-
-    public boolean updatePlayer(float deltaX, float deltaY){
-        float tempY;
-
-        //player.oldPosition.y = player.position.y;
-        //going down
-        if(deltaY > 0){
-            tempY = this.position.y;
-            tempY -= deltaY;
-            this.setPos(this.position.x, tempY);
-        }
-        //going up
-        else if(deltaY < 0){
-            tempY = this.position.y;
-            tempY -= deltaY;
-            this.setPos(this.position.x, tempY);
-        }
-
-        return true;
-    }
-	
-	
-	
 	
 	
 }

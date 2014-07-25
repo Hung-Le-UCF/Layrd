@@ -21,14 +21,7 @@ public class LayrdScreenGame implements Screen{
 		this.game = game;
 		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
+
 	@Override
 	public void render(float delta) {
 		
@@ -51,7 +44,7 @@ public class LayrdScreenGame implements Screen{
 		state = gameState.READY;
 		
 		//batch = new SpriteBatch();
-		world = new LayrdWorld("testMap.tmx");
+		world = new LayrdWorld(game);
 		
 
 	}
