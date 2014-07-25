@@ -65,7 +65,7 @@ public class LayrdScreenGame implements Screen{
 
 
 	@Override
-	public void render(float delta) {		
+	public void render(float delta) {
 		gameStateMachine(delta);
 	}
 

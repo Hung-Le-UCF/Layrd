@@ -59,9 +59,6 @@ public class LayrdWorld implements ContactListener, GestureListener{
 	private SpriteBatch batcher;
 	/////////////////////////////////////////////////////////
 
-	private LayrdGraphics graphicsLib;
-	private LayrdSound soundsLib;
-	private LayrdLogic gameLogic;
 
 	public LayrdWorld(String levelName, float difficulty ){
 
@@ -81,31 +78,15 @@ public class LayrdWorld implements ContactListener, GestureListener{
 		System.out.println("diff:" + difficulty);
 
 		// initialize library
-		graphicsLib = new LayrdGraphics();
 		loadGraphics();
-
-		soundsLib = new LayrdSound();
-		gameLogic = new LayrdLogic();
 
 		world = new World(new Vector2(0, 0), true);
 		b2dr = new Box2DDebugRenderer();
 
-
+		//
 		world.setContactListener(this);
 
-
-
-
-		//  makes the sprite for gameOver Screen
-		//  TODO make sprites for READY/ PAUSED screen
-		batcher = new SpriteBatch();
-		items = graphicsLib.getSpriteTexture("items");
-		gameOver = new TextureRegion(items, 352, 256,160, 96);
-
-
-
-		// TODO LayrdInput is not completed
-		//gestureDect = new GestureDetector(new LayrdInput());
+		// 
 		GestureDetector gestureDect = new GestureDetector(this);
 		Gdx.input.setInputProcessor(gestureDect);
 
@@ -122,7 +103,6 @@ public class LayrdWorld implements ContactListener, GestureListener{
 
 
 
-		//TODO
 		// must initialize player before initialize map
 		playerInitialize();
 		System.out.println("Player initialized");
@@ -150,11 +130,17 @@ public class LayrdWorld implements ContactListener, GestureListener{
 	}
 
 	// TODO
-	// this load all graphical items
+	// this load all graphical items this world will need
 	// should have load this on separate statics class and only call here when needed
 	private void loadGraphics(){
-		graphicsLib.loadSprite("player", "sprite.png");
-		graphicsLib.loadSprite("items", "items.png");
+		LayrdGraphics.loadSprite("player", "sprite.png");
+		LayrdGraphics.loadSprite("items", "items.png");
+
+		//  makes the sprite for gameOver Screen
+		//  TODO make sprites for READY/ PAUSED screen
+		batcher = new SpriteBatch();
+		items = LayrdGraphics.getTexture("items");
+		gameOver = new TextureRegion(items, 352, 256,160, 96);
 	}
 
 	private void playerInitialize(){
@@ -179,7 +165,7 @@ public class LayrdWorld implements ContactListener, GestureListener{
 		// TODO require investigate of multiple objects using the same texture
 		// be aware that the texture here is originate in graphics library
 		// any direct change to texture MAY OR MAY NOT cause change to all objects using it
-		player.sprite.set(new Sprite (graphicsLib.getSpriteTexture("player")) );
+		player.sprite.set(new Sprite (LayrdGraphics.getTexture("player")) );
 
 		// TODO replace hard coded numbers to variable/constant if possible
 		player.sprite.setSize(44, 66);
@@ -273,8 +259,8 @@ public class LayrdWorld implements ContactListener, GestureListener{
 				fdefPlayer.filter.maskBits = 4;
 
 				world.createBody(bdefPlayer).createFixture(fdefPlayer).setUserData("obstacle");
-				
-				
+
+
 			}
 		}
 
@@ -311,6 +297,10 @@ public class LayrdWorld implements ContactListener, GestureListener{
 
 			}
 		}
+
+
+		squarePlayer.dispose();
+		squareEndRegion.dispose();
 
 
 	}
@@ -486,16 +476,12 @@ public class LayrdWorld implements ContactListener, GestureListener{
 	public void beginContact(Contact contact) {
 		// TODO Auto-generated method stub
 		//System.out.println("contact detected");
-		Fixture fa = contact.getFixtureA();
-		Fixture fb = contact.getFixtureB();
-
 	}
 
 	@Override
 	public void endContact(Contact contact) {
 		// TODO Auto-generated method stub
 		//System.out.println("contact ended");
-
 	}
 
 	@Override
