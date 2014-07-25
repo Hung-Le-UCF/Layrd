@@ -3,33 +3,70 @@ package com.Voltronics.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 
 public class LayrdScreenGame implements Screen{
 
-	private enum gameState{ READY, PLAYING, PAUSED, LEVELFINISH, GAMEOVER}
-	gameState state;
-	
-	LayrdGame game;
-	LayrdWorld world;
-	
-	SpriteBatch batch;
-	
-	
-	
+	//private enum gameState{ READY, PLAYING, PAUSED, LEVELFINISH, GAMEOVER}
+	//private gameState state;
+
+	private LayrdGame game;
+	private LayrdWorld world;
+
+	private SpriteBatch batch;
+
+	private float difficulty = 1;
+	private String levelName = "level";
+	private String tileMapExtension = ".tmx";
+
+	private float gameScore = 0;
+
+
+
 	public LayrdScreenGame(LayrdGame game){
 		this.game = game;
-		
+
 	}
 
+
+	public void gameStateMachine(float delta){
+
+		switch(world.state){
+		case PLAYING:
+			// keep update the game
+			world.statePlaying(delta);
+			break;
+			
+		case PAUSED:
+			// no update while paused
+			world.statePaused();
+			break;
+		
+		case LEVELFINISH:
+			// the level finished, update score
+			// increase difficulty level, disposed old world, and load new world
+			world.stateFinishLevel(delta);
+			difficulty++;
+			world.dispose();
+			
+			world = new LayrdWorld(levelName + (int)difficulty + tileMapExtension, difficulty);
+			break;
+
+		case GAMEOVER:
+			// game over, wait for touch to exit
+			world.stateGameover(delta);
+			if (Gdx.input.isTouched()) {
+				game.setScreen(new LayrdScreenMainMenu(game));
+			}
+			break;
+		default:
+			break;
+		}
+	}
+
+
 	@Override
-	public void render(float delta) {
-		
-		// update game world
-		// world.stateMachine(Gdx.graphics.getDeltaTime());
-		world.stateMachine(delta);
-		
-		
+	public void render(float delta) {		
+		gameStateMachine(delta);
 	}
 
 	@Override
@@ -41,12 +78,7 @@ public class LayrdScreenGame implements Screen{
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
-		state = gameState.READY;
-		
-		//batch = new SpriteBatch();
-		world = new LayrdWorld(game);
-		
-
+		world = new LayrdWorld(levelName + (int)difficulty + tileMapExtension, difficulty);
 	}
 
 	@Override
@@ -57,19 +89,19 @@ public class LayrdScreenGame implements Screen{
 	@Override
 	public void pause() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void resume() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void dispose() {
 
-        world.dispose();
+		world.dispose();
 	}
 
 }
