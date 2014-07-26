@@ -31,6 +31,9 @@ public class LayrdScreenGame implements Screen{
 			// TODO
 			// this state display rather sketchy
 			world.stateReady(delta);
+            if(Gdx.input.isTouched()){
+                world.state = LayrdWorld.worldState.PLAYING;
+            }
 			break;
 		
 		case PLAYING:
