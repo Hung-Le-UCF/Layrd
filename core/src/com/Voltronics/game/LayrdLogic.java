@@ -14,11 +14,19 @@ package com.Voltronics.game;
 
 public class LayrdLogic {
 	
-	public float SCREEN_WIDTH;
-	public float SCREEN_HEIGHT;
+	public static float SCREEN_WIDTH;
+	public static float SCREEN_HEIGHT;
 	
-	public float PLAYER_WIDTH;
-	public float PLAYER_HEIGHT;
+	public static float PLAYER_WIDTH;
+	public static float PLAYER_HEIGHT;
+	
+	public static int LOSE_COUNT_WARNING = 5;
+	public static float PLAY_TIME_WARNING = 10000;
+	
+	public static float FRAME_RATE = 60;
+	public static float SEC_PER_FRAME = 1.0f/FRAME_RATE;
+	
+	
 	
 	
 	

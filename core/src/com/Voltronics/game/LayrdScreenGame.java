@@ -2,25 +2,21 @@ package com.Voltronics.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class LayrdScreenGame implements Screen{
 
-	//private enum gameState{ READY, PLAYING, PAUSED, LEVELFINISH, GAMEOVER}
-	//private gameState state;
-
 	private LayrdGame game;
 	private LayrdWorld world;
-
-	private SpriteBatch batch;
 
 	private float difficulty = 1;
 	private String levelName = "level";
 	private String tileMapExtension = ".tmx";
 
 	private float gameScore = 0;
+	private float playTime = 0;
+	private int loseCount = 0;
 
-
+	
 
 	public LayrdScreenGame(LayrdGame game){
 		this.game = game;
@@ -31,9 +27,21 @@ public class LayrdScreenGame implements Screen{
 	public void gameStateMachine(float delta){
 
 		switch(world.state){
+		case READY:
+			// TODO
+			// this state display rather sketchy
+			world.stateReady(delta);
+			break;
+		
 		case PLAYING:
 			// keep update the game
 			world.statePlaying(delta);
+			
+			// for now game score are measure by time when user playing the game
+			// without losing of course
+			gameScore += delta;
+			playTime += delta;
+			
 			break;
 			
 		case PAUSED:
@@ -48,6 +56,9 @@ public class LayrdScreenGame implements Screen{
 			difficulty++;
 			world.dispose();
 			
+			// we win, let reset lose counter
+			loseCount = 0;
+			
 			world = new LayrdWorld(levelName + (int)difficulty + tileMapExtension, difficulty);
 			break;
 
@@ -55,8 +66,32 @@ public class LayrdScreenGame implements Screen{
 			// game over, wait for touch to exit
 			world.stateGameover(delta);
 			if (Gdx.input.isTouched()) {
+				// TODO
+				// update game score to leader board here
+				
+				
+				
+				// reset score, increment loseCount
+				gameScore = 0;
+				loseCount++;
+				
+				if(loseCount > LayrdLogic.LOSE_COUNT_WARNING){
+					// TODO
+					// display lose count warning here, suggest user to take a rest before continues
+				}
+				else if(playTime > LayrdLogic.PLAY_TIME_WARNING){
+					// TODO
+					// display play time warning here, suggest user to take a rest before continues
+					
+				}
+				
+				
+				
+				// TODO
+				// may want to add play again in conjunction with exit to menu
 				game.setScreen(new LayrdScreenMainMenu(game));
 			}
+			
 			break;
 		default:
 			break;
@@ -66,7 +101,9 @@ public class LayrdScreenGame implements Screen{
 
 	@Override
 	public void render(float delta) {
+		
 		gameStateMachine(delta);
+
 	}
 
 	@Override
@@ -77,7 +114,7 @@ public class LayrdScreenGame implements Screen{
 
 	@Override
 	public void show() {
-		// TODO Auto-generated method stub
+		
 		world = new LayrdWorld(levelName + (int)difficulty + tileMapExtension, difficulty);
 	}
 

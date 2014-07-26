@@ -69,6 +69,8 @@ public class LayrdWorld implements ContactListener, GestureListener{
 		gameComponentsInitialize(levelName);
 
 		System.out.println("Components Loaded");
+		
+		state = worldState.READY;
 
 	}
 
@@ -124,9 +126,6 @@ public class LayrdWorld implements ContactListener, GestureListener{
 		// clear screen
 		Gdx.gl.glClearColor(0, 1, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-		state = worldState.PLAYING;
-		//stateMachine(difficulty);
 	}
 
 	// TODO
@@ -305,35 +304,9 @@ public class LayrdWorld implements ContactListener, GestureListener{
 
 	}
 
-
-	// this method check for the state of the game and update if necessary
-	public void stateMachine(float delta){
-
-		//System.out.println("STATE" + state.toString());
-		switch(state){
-		case READY:
-			stateReady(delta);
-			break;
-		case PLAYING:
-			statePlaying(delta);
-			break;
-		case PAUSED:
-			break;
-		case LEVELFINISH:
-			stateFinishLevel(delta);
-			break;
-		case GAMEOVER:
-			stateGameover(delta);
-			break;
-		default:
-			break;
-		}
-
-	}
-
-	private void stateReady(float delta) {
-		Gdx.gl.glClearColor(1, 0, 1, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+	public void stateReady(float delta) {
+		//Gdx.gl.glClearColor(1, 0, 1, 1);
+		//Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		//System.out.println("System Paused");
 		camera.update();
