@@ -4,11 +4,17 @@ import com.badlogic.gdx.Game;
 
 public class LayrdGame extends Game {
 	
+	LayrdGoogleGameInterface googleGameInterface;
+	
 	private enum LayrdGameState{PLAYING, PAUSE};
 	private LayrdGameState gameState = LayrdGameState.PAUSE;
 	
 	private LayrdScreenMainMenu mainMenu;
 
+	public LayrdGame(LayrdGoogleGameInterface googleInterface)
+	{
+		googleGameInterface = googleInterface;
+	}
 	@Override
 	public void create() {
 

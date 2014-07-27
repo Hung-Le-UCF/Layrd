@@ -59,12 +59,12 @@ public class LayrdScreenMainMenu implements Screen {
 			}
 			else if (OverlapTester.pointInRectangle(highScoreBounds, touchPoint.x, touchPoint.y))
 			{
-				//game.gameInterface.getLeaderboardGPGS();
+				game.googleGameInterface.getLeaderboardGPGS();
 				return;
 			}
 			else if (OverlapTester.pointInRectangle(achievementBounds, touchPoint.x, touchPoint.y))
 			{
-				//game.gameInterface.getAchievementsGPGS();
+				game.googleGameInterface.getAchievementsGPGS();
 				return;
 			}
 		}
