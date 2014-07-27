@@ -123,7 +123,7 @@ public class LayrdScreenGame implements Screen{
 
         batch.begin();
         yourBitmapFontName.setColor(1.0f, 1.0f, 1.0f, 1.0f);
-        yourBitmapFontName.draw(batch, yourScoreName, 50, 700);
+        yourBitmapFontName.draw(batch, yourScoreName, 50, 300);
         batch.end();
 
 
