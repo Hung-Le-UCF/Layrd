@@ -2,6 +2,9 @@ package com.Voltronics.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 
 public class LayrdScreenGame implements Screen{
 
@@ -12,9 +15,14 @@ public class LayrdScreenGame implements Screen{
 	private String levelName = "level";
 	private String tileMapExtension = ".tmx";
 
-	private float gameScore = 0;
+	private int gameScore;
 	private float playTime = 0;
 	private int loseCount = 0;
+
+    private String yourScoreName;
+    BitmapFont yourBitmapFontName;
+
+    private SpriteBatch batch;
 
 	
 
@@ -42,8 +50,11 @@ public class LayrdScreenGame implements Screen{
 			
 			// for now game score are measure by time when user playing the game
 			// without losing of course
-			gameScore += delta;
-			playTime += delta;
+            //  added times the difficulty so that the score will go up faster when farther in level
+
+            gameScore += (int) (1 * difficulty );
+            yourScoreName = "Score: " + gameScore;
+            playTime += delta;
 			
 			break;
 			
@@ -107,6 +118,12 @@ public class LayrdScreenGame implements Screen{
 		
 		gameStateMachine(delta);
 
+        batch.begin();
+        yourBitmapFontName.setColor(1.0f, 1.0f, 1.0f, 1.0f);
+        yourBitmapFontName.draw(batch, yourScoreName, 50, 700);
+        batch.end();
+
+
 	}
 
 	@Override
@@ -119,6 +136,13 @@ public class LayrdScreenGame implements Screen{
 	public void show() {
 		
 		world = new LayrdWorld(levelName + (int)difficulty + tileMapExtension, difficulty);
+
+        batch = new SpriteBatch();
+        gameScore = 0;
+        yourScoreName = "score: 0";
+        yourBitmapFontName = new BitmapFont();
+        yourBitmapFontName.setScale(5);
+
 	}
 
 	@Override

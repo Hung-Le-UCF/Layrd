@@ -4,11 +4,6 @@ package com.Voltronics.game;
 public class Player extends GameObject{
 
 
-
-	public int health;
-
-
-
     public enum state{IDLE, MOVING, DYING};
 	public state plState = state.IDLE;
 	
