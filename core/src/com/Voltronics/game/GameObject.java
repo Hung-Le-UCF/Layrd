@@ -20,4 +20,10 @@ public class GameObject {
 		sprite = new Sprite();
 	}
 
+
+    public void setSize(float x, float y){
+        rectBounds.setSize(x, y);
+        sprite.setSize(x,y);
+    }
+
 }

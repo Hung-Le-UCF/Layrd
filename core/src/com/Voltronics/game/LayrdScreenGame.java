@@ -79,32 +79,35 @@ public class LayrdScreenGame implements Screen{
 		case GAMEOVER:
 			// game over, wait for touch to exit
 			world.stateGameover(delta);
-			if (Gdx.input.isTouched()) {
-				// TODO
-				// update game score to leader board here
-				
-				
-				
-				// reset score, increment loseCount
-				gameScore = 0;
-				loseCount++;
-				
-				if(loseCount > LayrdLogic.LOSE_COUNT_WARNING){
-					// TODO
-					// display lose count warning here, suggest user to take a rest before continues
-				}
-				else if(playTime > LayrdLogic.PLAY_TIME_WARNING){
-					// TODO
-					// display play time warning here, suggest user to take a rest before continues
-					
-				}
-				
-				
-				
-				// TODO
-				// may want to add play again in conjunction with exit to menu
-				game.setScreen(new LayrdScreenMainMenu(game));
-			}
+			if (!world.isPanning){
+                if (Gdx.input.isTouched()) {
+                    // TODO
+                    // update game score to leader board here
+
+
+
+                    // reset score, increment loseCount
+                    gameScore = 0;
+                    loseCount++;
+
+                    if(loseCount > LayrdLogic.LOSE_COUNT_WARNING){
+                        // TODO
+                        // display lose count warning here, suggest user to take a rest before continues
+                    }
+                    else if(playTime > LayrdLogic.PLAY_TIME_WARNING){
+                        // TODO
+                        // display play time warning here, suggest user to take a rest before continues
+
+                    }
+
+
+
+                    // TODO
+                    // may want to add play again in conjunction with exit to menu
+                    game.setScreen(new LayrdScreenMainMenu(game));
+                }
+            }
+
 			
 			break;
 		default:
@@ -141,7 +144,7 @@ public class LayrdScreenGame implements Screen{
         gameScore = 0;
         yourScoreName = "score: 0";
         yourBitmapFontName = new BitmapFont();
-        yourBitmapFontName.setScale(5);
+        yourBitmapFontName.setScale(3);
 
 	}
 

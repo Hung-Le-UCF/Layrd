@@ -18,7 +18,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
-import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.ChainShape;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
@@ -41,12 +40,10 @@ public class LayrdWorld implements ContactListener, GestureListener{
 	////////////////////////////////////////////////////////
 	public OrthogonalTiledMapRenderer renderer;
 	public OrthographicCamera camera;
-	private Box2DDebugRenderer b2dr;
 
 	private World world;
 	private TiledMap map;
 
-	//private ListenerClass listener;
 	private Body playerBody;
 	private Body endingBody;
 
@@ -58,6 +55,8 @@ public class LayrdWorld implements ContactListener, GestureListener{
 	private TextureRegion gameOver;
 	private TextureRegion ready;
     private SpriteBatch batcher;
+
+    boolean isPanning;
 
 	/////////////////////////////////////////////////////////
 
@@ -85,7 +84,6 @@ public class LayrdWorld implements ContactListener, GestureListener{
 		loadGraphics();
 
 		world = new World(new Vector2(0, 0), true);
-		b2dr = new Box2DDebugRenderer();
 
 		//
 		world.setContactListener(this);
@@ -171,7 +169,7 @@ public class LayrdWorld implements ContactListener, GestureListener{
 		player.sprite.set(new Sprite (LayrdGraphics.getTexture("player")) );
 
 		// TODO replace hard coded numbers to variable/constant if possible
-		player.sprite.setSize(44, 66);
+		player.setSize(44, 66);
 	}
 
 	private void mapInitialize(){
@@ -192,7 +190,6 @@ public class LayrdWorld implements ContactListener, GestureListener{
 		FixtureDef fdefPlayer = new FixtureDef();
 		BodyDef bdefEndRegion = new BodyDef();
 		FixtureDef fdefEndRegion = new FixtureDef();
-		//ChainShape shape = new ChainShape();
 		PolygonShape squarePlayer = new PolygonShape();
 		PolygonShape squareEndRegion = new PolygonShape();
 
@@ -344,7 +341,7 @@ public class LayrdWorld implements ContactListener, GestureListener{
 
 		// update camera and player position
 		camera.position.set(mapX, player.position.y + player.rectBounds.height, 0);
-		player.setPos(mapX, player.position.y);
+		player.setPos(player.position.x + delta * 60 * difficulty, player.position.y);
 
 		playerBody.setTransform(player.position.x + player.rectBounds.height / 3,
 				player.position.y - player.rectBounds.width / 1.375f, 0);
@@ -360,7 +357,7 @@ public class LayrdWorld implements ContactListener, GestureListener{
 		renderer.setView(camera);
 
 		renderer.render();
-		b2dr.render(world, camera.combined);
+		//b2dr.render(world, camera.combined);
 
 		renderer.getSpriteBatch().begin();
 
@@ -380,7 +377,7 @@ public class LayrdWorld implements ContactListener, GestureListener{
 
 	public void stateGameover(float delta){
 
-		Gdx.gl.glClearColor(0, 1, 0, 1);
+		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		batcher.begin();
@@ -404,22 +401,32 @@ public class LayrdWorld implements ContactListener, GestureListener{
 
 	}
 
-	public boolean updatePlayer(float deltaX, float deltaY){
+	public boolean updatePlayer(float deltaX, float deltaY, float x, float y){
 		float tempY;
 
 		//player.oldPosition.y = player.position.y;
 		//going down
+/*
 		if(deltaY > 0){
 			tempY = player.position.y;
-			tempY -= deltaY;
+			tempY += deltaY;
 			player.setPos(player.position.x, tempY);
 		}
 		//going up
 		else if(deltaY < 0){
 			tempY = player.position.y;
-			tempY -= deltaY;
+			tempY += deltaY;
 			player.setPos(player.position.x, tempY);
 		}
+*/
+        if( ( (x+deltaX) <= player.position.x + player.rectBounds.getWidth()/2 || (x+deltaX) >= player.position.x - player.rectBounds.getWidth()/2) &&
+                ( (y+deltaY) <= player.position.y + player.rectBounds.getHeight()/2 || (y+deltaY) >= player.position.y - player.rectBounds.getHeight()/2)
+                ) {
+            player.setPos(player.position.x + deltaX, player.position.y);
+        }else{
+            player.setPos(player.position.x, player.position.y + deltaY);
+        }
+
 
 		return true;
 	}
@@ -442,7 +449,7 @@ public class LayrdWorld implements ContactListener, GestureListener{
 	public void dispose(){
 		map.dispose();
 		renderer.dispose();
-		b2dr.dispose();
+		//b2dr.dispose();
 		world.dispose();
 		player.sprite.getTexture().dispose();
 		batcher.dispose();
@@ -506,8 +513,9 @@ public class LayrdWorld implements ContactListener, GestureListener{
 	public boolean pan(float x, float y, float deltaX, float deltaY) {
 		// TODO Auto-generated method stub
 
+        isPanning = true;
 		if(state == worldState.PLAYING)
-			return updatePlayer(deltaX, deltaY);
+			return updatePlayer(deltaX, deltaY, x, y);
 
 		return false;
 	}
@@ -515,6 +523,7 @@ public class LayrdWorld implements ContactListener, GestureListener{
 	@Override
 	public boolean panStop(float x, float y, int pointer, int button) {
 		// TODO Auto-generated method stub
+        isPanning = false;
 		return false;
 	}
 
