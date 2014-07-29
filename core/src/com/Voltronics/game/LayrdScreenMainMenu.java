@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Rectangle;
@@ -24,8 +25,10 @@ public class LayrdScreenMainMenu implements Screen {
 	Rectangle playBounds;
 	Rectangle achievementBounds;
 	Rectangle highScoreBounds;
-	
-	public LayrdScreenMainMenu(LayrdGame aGame)
+    private Texture backGroundImg;
+    TextureRegion backGround;
+
+    public LayrdScreenMainMenu(LayrdGame aGame)
 	{
 		System.out.println("mainmenu Loaded");
         game = aGame;
@@ -74,29 +77,32 @@ public class LayrdScreenMainMenu implements Screen {
 	public void render(float delta) {
 		
 		update(delta);
-		
-		// TODO Auto-generated method stub
-		Gdx.gl.glClearColor(0, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		guiCam.update();
-		batch.setProjectionMatrix(guiCam.combined);
-		sRender.setProjectionMatrix(guiCam.combined);
-		
+		draw(delta);
 
-		batch.begin();
-		//batch.draw(img, 0, 0);
-		batch.draw(Assets.mainMenu, 80, 100);
-		batch.end();
-		
-		 sRender.begin(ShapeType.Filled);
-		 sRender.setColor(0, 1, 0, 1);
-		 sRender.rect(110,130, 240, 40);
-		 sRender.end();
-		
-	
-		
-		
 	}
+
+    public void draw(float delta){
+        backGroundImg = new Texture(Gdx.files.internal("background.png"));
+        backGround = new TextureRegion(backGroundImg, 0, 0, 480, 320);
+
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        guiCam.update();
+        batch.setProjectionMatrix(guiCam.combined);
+        sRender.setProjectionMatrix(guiCam.combined);
+
+        batch.disableBlending();
+        batch.begin();
+        batch.draw(backGround, 0, 0, 480, 320);
+        batch.end();
+
+        batch.enableBlending();
+        batch.begin();
+        //batch.draw(img, 0, 0);
+        batch.draw(Assets.mainMenu, 80, 100);
+        batch.end();
+    }
+
 	@Override
 	public void resize(int width, int height) {
 		// TODO Auto-generated method stub
@@ -107,7 +113,7 @@ public class LayrdScreenMainMenu implements Screen {
 	public void show() {
 		// TODO Auto-generated method stub
 
-	}
+    }
 
 	@Override
 	public void hide() {

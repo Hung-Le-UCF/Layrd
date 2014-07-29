@@ -3,14 +3,14 @@ package com.Voltronics.game.android;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.Voltronics.game.LayrdGame;
+import com.Voltronics.game.LayrdGoogleGameInterface;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.games.Games;
 import com.google.example.games.basegameutils.GameHelper;
-import com.google.example.games.basegameutils.GameHelper.GameHelperListener;
-import com.Voltronics.game.LayrdGame;
-import com.Voltronics.game.LayrdGoogleGameInterface;
+
 
 public class AndroidLauncher extends AndroidApplication implements LayrdGoogleGameInterface{
 	
@@ -27,7 +27,7 @@ public class AndroidLauncher extends AndroidApplication implements LayrdGoogleGa
 		initialize(new LayrdGame(this), config);
 	
 	    // enable debug logs (if applicable)
-	    GameHelperListener listener = new GameHelper.GameHelperListener() {
+	    GameHelper.GameHelperListener listener = new GameHelper.GameHelperListener() {
 	        @Override
 	        public void onSignInSucceeded() 
 	        {

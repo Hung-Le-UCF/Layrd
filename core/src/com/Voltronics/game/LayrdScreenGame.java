@@ -40,6 +40,7 @@ public class LayrdScreenGame implements Screen{
 			// this state display rather sketchy
 			world.stateReady(delta);
             if(Gdx.input.isTouched()){
+                //world.state = LayrdRandomWorld.worldState.PLAYING;
                 world.state = LayrdWorld.worldState.PLAYING;
             }
 			break;
@@ -53,6 +54,7 @@ public class LayrdScreenGame implements Screen{
             //  added times the difficulty so that the score will go up faster when farther in level
 
             gameScore += (int) (1 * difficulty );
+
             yourScoreName = "Score: " + gameScore;
             playTime += delta;
 			
@@ -62,7 +64,7 @@ public class LayrdScreenGame implements Screen{
 			// no update while paused
 			world.statePaused();
 			break;
-		
+
 		case LEVELFINISH:
 			// the level finished, update score
 			// increase difficulty level, disposed old world, and load new world

@@ -18,6 +18,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.ChainShape;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
@@ -40,6 +41,7 @@ public class LayrdWorld implements ContactListener, GestureListener{
 	////////////////////////////////////////////////////////
 	public OrthogonalTiledMapRenderer renderer;
 	public OrthographicCamera camera;
+    //private Box2DDebugRenderer b2dr;
 
 	private World world;
 	private TiledMap map;
@@ -115,12 +117,12 @@ public class LayrdWorld implements ContactListener, GestureListener{
 		// initialize camera
 		renderer = new OrthogonalTiledMapRenderer(map);
 		camera = new OrthographicCamera(480, 320);
+//        b2dr = new Box2DDebugRenderer();
 
 
 		//  makes the camera zoom only the first time
 		camera.zoom = 1;
 		camera.zoom *= 2.5f;
-		System.out.println("camera.zom" + camera.zoom);
 		camera.update();
 
 		// clear screen
@@ -132,7 +134,7 @@ public class LayrdWorld implements ContactListener, GestureListener{
 	// this load all graphical items this world will need
 	// should have load this on separate statics class and only call here when needed
 	private void loadGraphics(){
-		LayrdGraphics.loadSprite("player", "sprite.png");
+		LayrdGraphics.loadSprite("player", "ship.png");
 		LayrdGraphics.loadSprite("items", "items.png");
 
 		//  makes the sprite for gameOver Screen
@@ -154,14 +156,8 @@ public class LayrdWorld implements ContactListener, GestureListener{
 		//  without this there was issues with player not able to reach bottom of screen
 		player = new Player(0, 100, 44, 66);
 
-		System.out.println("posX "+ player.position.x);
-		System.out.println("posy "+ player.position.y);
-
 		//  makes player jump to middle of screen for starting
 		player.setPos(player.position.x, 800 / 2 - 64 / 2);
-
-		System.out.println("posX UPDATE "+ player.position.x);
-		System.out.println("posy UPDATE"+ player.position.y);
 
 		// TODO require investigate of multiple objects using the same texture
 		// be aware that the texture here is originate in graphics library
@@ -178,7 +174,6 @@ public class LayrdWorld implements ContactListener, GestureListener{
 		//gameOver = new TextureRegion(items, 352, 256,160, 96);
 
 		mapX = 0;
-		System.out.println("map === " + map.getLayers().get(0).getName());
 		// gets layer that the obstacles are in
 		TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get("obstacles");
 		TiledMapTileLayer finish = (TiledMapTileLayer) map.getLayers().get("end");
@@ -336,9 +331,6 @@ public class LayrdWorld implements ContactListener, GestureListener{
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-
-		//System.out.println(world.getContactCount());
-
 		// update camera and player position
 		camera.position.set(mapX, player.position.y + player.rectBounds.height, 0);
 		player.setPos(player.position.x + delta * 60 * difficulty, player.position.y);
@@ -357,7 +349,7 @@ public class LayrdWorld implements ContactListener, GestureListener{
 		renderer.setView(camera);
 
 		renderer.render();
-		//b2dr.render(world, camera.combined);
+//		b2dr.render(world, camera.combined);
 
 		renderer.getSpriteBatch().begin();
 
@@ -419,8 +411,8 @@ public class LayrdWorld implements ContactListener, GestureListener{
 			player.setPos(player.position.x, tempY);
 		}
 */
-        if( ( (x+deltaX) <= player.position.x + player.rectBounds.getWidth()/2 || (x+deltaX) >= player.position.x - player.rectBounds.getWidth()/2) &&
-                ( (y+deltaY) <= player.position.y + player.rectBounds.getHeight()/2 || (y+deltaY) >= player.position.y - player.rectBounds.getHeight()/2)
+        if( ( (x+deltaX) <= player.position.x + player.rectBounds.getWidth()/2 && (x+deltaX) >= player.position.x - player.rectBounds.getWidth()/2) &&
+                ( (y+deltaY) <= player.position.y + player.rectBounds.getHeight()/2 && (y+deltaY) >= player.position.y - player.rectBounds.getHeight()/2)
                 ) {
             player.setPos(player.position.x + deltaX, player.position.y);
         }else{
@@ -449,7 +441,7 @@ public class LayrdWorld implements ContactListener, GestureListener{
 	public void dispose(){
 		map.dispose();
 		renderer.dispose();
-		//b2dr.dispose();
+//		b2dr.dispose();
 		world.dispose();
 		player.sprite.getTexture().dispose();
 		batcher.dispose();
