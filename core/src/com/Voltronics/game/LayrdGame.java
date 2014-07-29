@@ -19,16 +19,25 @@ public class LayrdGame extends Game {
 	public void create() {
 
 		System.out.println("Game Create");
-		Assets.load();
+		//Assets.load();
+		
+		loadAssets();
 		
 		setScreen(new LayrdScreenMainMenu(this));
 		//setScreen(new LayrdScreenGame(this));
 	}
 	
-	public void playing(){
+	private void loadAssets(){
+		// load the game graphics
+		LayrdGraphics.loadTexture("player", "ship.png");
+		LayrdGraphics.loadTexture("items", "items.png");
+
+		
+		
+		// load the game audio
+		
 		
 	}
-	
 	
 	
 	@Override

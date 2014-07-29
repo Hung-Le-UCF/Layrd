@@ -89,26 +89,6 @@ public class LayrdInput implements GestureListener, InputProcessor {
 
 	@Override
 	public boolean pan(float x, float y, float deltaX, float deltaY) {
-		float tempX , tempY;
-		
-		// oldY = getY();
-		//going down
-		/*
-		if(deltaY > 0){
-			tempY = getY();
-			tempY -= deltaY;
-			setY(tempY);
-			//}
-		
-		}
-		//going up
-		else if(deltaY < 0){
-			tempY = getY();
-			tempY -= deltaY;
-			setY(tempY);
-			}
-		 */
-		
 		return false;
 	}
 

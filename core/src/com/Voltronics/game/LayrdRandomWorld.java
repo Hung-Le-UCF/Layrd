@@ -130,8 +130,8 @@ public class LayrdRandomWorld implements ContactListener, GestureListener{
     // this load all graphical items this world will need
     // should have load this on separate statics class and only call here when needed
     private void loadGraphics(){
-        LayrdGraphics.loadSprite("player", "ship.png");
-        LayrdGraphics.loadSprite("items", "items.png");
+        LayrdGraphics.loadTexture("player", "ship.png");
+        LayrdGraphics.loadTexture("items", "items.png");
         backGroundImg = new Texture(Gdx.files.internal("background.png"));
 
         //  makes the sprite for gameOver Screen

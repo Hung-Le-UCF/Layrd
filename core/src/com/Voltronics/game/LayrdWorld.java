@@ -134,9 +134,6 @@ public class LayrdWorld implements ContactListener, GestureListener{
 	// this load all graphical items this world will need
 	// should have load this on separate statics class and only call here when needed
 	private void loadGraphics(){
-		LayrdGraphics.loadSprite("player", "ship.png");
-		LayrdGraphics.loadSprite("items", "items.png");
-
 		//  makes the sprite for gameOver Screen
 		//  TODO make sprites for READY/ PAUSED screen
 		batcher = new SpriteBatch();
@@ -411,9 +408,7 @@ public class LayrdWorld implements ContactListener, GestureListener{
 			player.setPos(player.position.x, tempY);
 		}
 */
-        if( ( (x+deltaX) <= player.position.x + player.rectBounds.getWidth()/2 && (x+deltaX) >= player.position.x - player.rectBounds.getWidth()/2) &&
-                ( (y+deltaY) <= player.position.y + player.rectBounds.getHeight()/2 && (y+deltaY) >= player.position.y - player.rectBounds.getHeight()/2)
-                ) {
+        if( LayrdPhysics.pointInRectangle(player.rectBounds, x, y) ) {
             player.setPos(player.position.x + deltaX, player.position.y);
         }else{
             player.setPos(player.position.x, player.position.y + deltaY);

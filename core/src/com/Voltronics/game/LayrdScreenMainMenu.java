@@ -17,16 +17,16 @@ public class LayrdScreenMainMenu implements Screen {
 	
 	LayrdGame game;
 	
-	SpriteBatch batch;
-	Texture img;
-	OrthographicCamera guiCam;
-	ShapeRenderer sRender;
-	Vector3 touchPoint;
-	Rectangle playBounds;
-	Rectangle achievementBounds;
-	Rectangle highScoreBounds;
+	private SpriteBatch batch;
+	private Texture img;
+	private OrthographicCamera guiCam;
+	private ShapeRenderer sRender;
+	private Vector3 touchPoint;
+	private Rectangle playBounds;
+	private Rectangle achievementBounds;
+	private Rectangle highScoreBounds;
     private Texture backGroundImg;
-    TextureRegion backGround;
+    private TextureRegion backGround;
 
     public LayrdScreenMainMenu(LayrdGame aGame)
 	{
@@ -55,17 +55,17 @@ public class LayrdScreenMainMenu implements Screen {
 		if (Gdx.input.justTouched()) {
 			guiCam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
 
-			if (OverlapTester.pointInRectangle(playBounds, touchPoint.x, touchPoint.y)) 
+			if (LayrdPhysics.pointInRectangle(playBounds, touchPoint.x, touchPoint.y)) 
 			{
 				game.setScreen(new LayrdScreenGame(game));
 				return;
 			}
-			else if (OverlapTester.pointInRectangle(highScoreBounds, touchPoint.x, touchPoint.y))
+			else if (LayrdPhysics.pointInRectangle(highScoreBounds, touchPoint.x, touchPoint.y))
 			{
 				game.googleGameInterface.getLeaderboardGPGS();
 				return;
 			}
-			else if (OverlapTester.pointInRectangle(achievementBounds, touchPoint.x, touchPoint.y))
+			else if (LayrdPhysics.pointInRectangle(achievementBounds, touchPoint.x, touchPoint.y))
 			{
 				game.googleGameInterface.getAchievementsGPGS();
 				return;
@@ -99,7 +99,11 @@ public class LayrdScreenMainMenu implements Screen {
         batch.enableBlending();
         batch.begin();
         //batch.draw(img, 0, 0);
-        batch.draw(Assets.mainMenu, 80, 100);
+        
+        TextureRegion mainMenu = new TextureRegion(LayrdGraphics.getTexture("items"), 0, 224, 300, 110);
+        batch.draw(mainMenu, 80, 100);
+        
+        
         batch.end();
     }
 
