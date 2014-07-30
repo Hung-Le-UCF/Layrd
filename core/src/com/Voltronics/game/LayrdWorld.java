@@ -324,23 +324,35 @@ public class LayrdWorld implements ContactListener, GestureListener{
 		collisionDetection();
 
 
-
-		// clean screen
+        // clean screen
         Gdx.gl.glClearColor(0.74f, 0.76f, 0.78f, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        // update map offset
+        //  increases as the difficulty increases
+        if(difficulty == 1){
+            mapX += delta * 60 * difficulty * 3;
+        }
+        else{
+            mapX += delta * 60 * difficulty;
+        }
 
-		// update camera and player position
-		camera.position.set(mapX, player.position.y + player.rectBounds.height, 0);
-		player.setPos(player.position.x + delta * 60 * difficulty, player.position.y);
+
+        // update camera and player position
+        camera.position.set(mapX, player.position.y + player.rectBounds.height, 0);
+        if (difficulty == 1){
+            player.setPos(player.position.x + delta * 60 * difficulty * 3, player.position.y);
+
+        }
+        else{
+            player.setPos(player.position.x + delta * 60 * difficulty, player.position.y);
+
+        }
 
 		playerBody.setTransform(player.position.x + player.rectBounds.height / 3,
 				player.position.y - player.rectBounds.width / 1.375f, 0);
 		endingBody.setTransform(player.position.x + player.rectBounds.height / 3,
 				player.position.y - player.rectBounds.width / 1.375f, 0);
 
-		// update map offset
-		//  increases as the difficulty increases
-		mapX += delta * 60 * difficulty;
 
 		camera.update();
 
