@@ -126,7 +126,8 @@ public class LayrdWorld implements ContactListener, GestureListener{
 		camera.update();
 
 		// clear screen
-		Gdx.gl.glClearColor(0, 0, 0, 1);
+		//Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClearColor(0.74f, 0.76f, 0.78f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 	}
 
@@ -294,7 +295,7 @@ public class LayrdWorld implements ContactListener, GestureListener{
 	}
 
 	public void stateReady(float delta) {
-		Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClearColor(0.74f, 0.76f, 0.78f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batcher.begin();
@@ -325,7 +326,7 @@ public class LayrdWorld implements ContactListener, GestureListener{
 
 
 		// clean screen
-		Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClearColor(0.74f, 0.76f, 0.78f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		// update camera and player position
@@ -356,7 +357,7 @@ public class LayrdWorld implements ContactListener, GestureListener{
 	}
 
 	public void statePaused(){
-		Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClearColor(0.74f, 0.76f, 0.78f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         /*
         if (Gdx.input.isTouched()) {
@@ -383,7 +384,7 @@ public class LayrdWorld implements ContactListener, GestureListener{
 
 	public void stateFinishLevel(float delta){
 
-		Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClearColor(0.74f, 0.76f, 0.78f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		// update score
 
