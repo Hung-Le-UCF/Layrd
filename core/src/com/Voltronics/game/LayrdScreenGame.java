@@ -68,6 +68,7 @@ public class LayrdScreenGame implements Screen{
 		case LEVELFINISH:
 			// the level finished, update score
 			// increase difficulty level, disposed old world, and load new world
+            unlockAchievements();
 			world.stateFinishLevel(delta);
 			difficulty++;
 			world.dispose();
@@ -114,6 +115,52 @@ public class LayrdScreenGame implements Screen{
 			
 			break;
 		default:
+			break;
+		}
+	}
+	
+	private void unlockAchievements()
+	{
+		switch ((int)difficulty)
+		{
+		case 1:
+			game.googleGameInterface.unlockAchievementGPGS("CgkI5qzL-98HEAIQCg");
+			break;
+		case 2:
+			game.googleGameInterface.unlockAchievementGPGS("CgkI5qzL-98HEAIQCw");
+
+			break;
+		case 3:
+			game.googleGameInterface.unlockAchievementGPGS("CgkI5qzL-98HEAIQDA");
+
+			break;
+		case 4:
+			game.googleGameInterface.unlockAchievementGPGS("CgkI5qzL-98HEAIQDQ");
+
+			break;
+		case 5:
+			game.googleGameInterface.unlockAchievementGPGS("CgkI5qzL-98HEAIQDg");
+
+			break;
+		case 6:
+			game.googleGameInterface.unlockAchievementGPGS("CgkI5qzL-98HEAIQDw");
+
+			break;
+		case 7:
+			game.googleGameInterface.unlockAchievementGPGS("CgkI5qzL-98HEAIQEA");
+
+			break;
+		case 8:
+			game.googleGameInterface.unlockAchievementGPGS("CgkI5qzL-98HEAIQEQ");
+
+			break;
+		case 9:
+			game.googleGameInterface.unlockAchievementGPGS("CgkI5qzL-98HEAIQEg");
+
+			break;
+		case 10:
+			game.googleGameInterface.unlockAchievementGPGS("CgkI5qzL-98HEAIQEw");
+
 			break;
 		}
 	}
