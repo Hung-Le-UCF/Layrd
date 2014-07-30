@@ -88,6 +88,7 @@ public class AndroidLauncher extends AndroidApplication implements LayrdGoogleGa
 	@Override
 	public void submiteScoreGPGS(int score) {
 		// TODO Auto-generated method stub
+        Games.Leaderboards.submitScore(mHelper.getApiClient(), "CgkI5qzL-98HEAIQBQ", score);
 		
 	}
 

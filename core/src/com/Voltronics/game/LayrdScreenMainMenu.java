@@ -43,6 +43,9 @@ public class LayrdScreenMainMenu implements Screen {
 		playBounds = new Rectangle(110, 170, 240, 40);
 		highScoreBounds = new Rectangle(110,130, 240, 40);
 		achievementBounds = new Rectangle(110, 90, 240, 40);
+
+        backGroundImg = new Texture(Gdx.files.internal("background.png"));
+        backGround = new TextureRegion(backGroundImg, 0, 0, 480, 320);
 		
 	}
 	
@@ -82,8 +85,6 @@ public class LayrdScreenMainMenu implements Screen {
 	}
 
     public void draw(float delta){
-        backGroundImg = new Texture(Gdx.files.internal("background.png"));
-        backGround = new TextureRegion(backGroundImg, 0, 0, 480, 320);
 
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -136,7 +137,7 @@ public class LayrdScreenMainMenu implements Screen {
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
-
+        backGround.getTexture().dispose();
 	}
 
 }

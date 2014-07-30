@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="100" height="40" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="tilesetflat" tilewidth="32" tileheight="32">
+  <image source="tilesetflat.png" width="500" height="100"/>
+ </tileset>
+ <layer name="background" width="100" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztw0ENAAAMA6F71L/mCRkkrJqqqqqqqqqqqqqqqqqqqqrvH03+PoE=
+  </data>
+ </layer>
+ <layer name="obstacles" width="100" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt20ENAAAIxLDTgH+xvFEACW0yGaskpTMBAAAAAAAAAAAAAAAAAMAn23+vZg3oWQ4R
+  </data>
+ </layer>
+</map>

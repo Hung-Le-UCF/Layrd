@@ -105,6 +105,8 @@ public class LayrdWorld implements ContactListener, GestureListener{
 			System.out.println("Map Fail to load, load testMap.tmx");
 		}
 
+        //map = new TmxMapLoader().load("untitled.tmx");
+
 
 
 		// must initialize player before initialize map
@@ -126,7 +128,7 @@ public class LayrdWorld implements ContactListener, GestureListener{
 		camera.update();
 
 		// clear screen
-		Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClearColor(0.74f, 0.76f, 0.78f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 	}
 
@@ -154,10 +156,7 @@ public class LayrdWorld implements ContactListener, GestureListener{
 
 		//  makes player spawn at bottom of level
 		//  without this there was issues with player not able to reach bottom of screen
-		player = new Player(0, 100, 44, 66);
-
-		//  makes player jump to middle of screen for starting
-		player.setPos(player.position.x, 800 / 2 - 64 / 2);
+		player = new Player(0, 800 / 2 - 64 / 2, 44, 66);
 
 		// TODO require investigate of multiple objects using the same texture
 		// be aware that the texture here is originate in graphics library
@@ -297,7 +296,8 @@ public class LayrdWorld implements ContactListener, GestureListener{
 	}
 
 	public void stateReady(float delta) {
-		Gdx.gl.glClearColor(0, 0, 0, 1);
+        //Gdx.gl.glClearColor(0.17f, 0.24f, 0.31f, 1);
+        Gdx.gl.glClearColor(0.74f, 0.76f, 0.78f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batcher.begin();
@@ -328,21 +328,37 @@ public class LayrdWorld implements ContactListener, GestureListener{
 
 
 		// clean screen
-		Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClearColor(0.74f, 0.76f, 0.78f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        // update map offset
+        //  increases as the difficulty increases
+        if(difficulty == 1){
+            mapX += delta * 60 * difficulty * 3;
+        }
+        else{
+            mapX += delta * 60 * difficulty;
+        }
+
 
 		// update camera and player position
 		camera.position.set(mapX, player.position.y + player.rectBounds.height, 0);
-		player.setPos(player.position.x + delta * 60 * difficulty, player.position.y);
+		if (difficulty == 1){
+            player.setPos(player.position.x + delta * 60 * difficulty * 3, player.position.y);
+
+        }
+        else{
+            player.setPos(player.position.x + delta * 60 * difficulty, player.position.y);
+
+        }
+
 
 		playerBody.setTransform(player.position.x + player.rectBounds.height / 3,
 				player.position.y - player.rectBounds.width / 1.375f, 0);
 		endingBody.setTransform(player.position.x + player.rectBounds.height / 3,
 				player.position.y - player.rectBounds.width / 1.375f, 0);
 
-		// update map offset
-		//  increases as the difficulty increases
-		mapX += delta * 60 * difficulty;
+
+
 
 		camera.update();
 
@@ -359,7 +375,7 @@ public class LayrdWorld implements ContactListener, GestureListener{
 	}
 
 	public void statePaused(){
-		Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClearColor(0.74f, 0.76f, 0.78f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         /*
         if (Gdx.input.isTouched()) {
@@ -386,7 +402,7 @@ public class LayrdWorld implements ContactListener, GestureListener{
 
 	public void stateFinishLevel(float delta){
 
-		Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClearColor(0.74f, 0.76f, 0.78f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		// update score
 

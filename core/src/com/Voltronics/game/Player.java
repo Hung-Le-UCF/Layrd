@@ -18,9 +18,12 @@ public class Player extends GameObject{
 	
 	
 	public void setPos(float x, float y){
-		this.position.x = Math.max(this.rectBounds.x/2, x);
-		this.position.y = Math.max(this.rectBounds.y/2, y);
-		
+		//this.position.x = Math.max(this.rectBounds.x/2, x);
+		//this.position.y = Math.max(this.rectBounds.y/2, y);
+		this.position.x = x;
+        this.position.y = y;
+
+
 		sprite.setPosition(x, y);
 	}
 

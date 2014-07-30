@@ -81,7 +81,7 @@ public class LayrdScreenGame implements Screen{
 		case GAMEOVER:
 			// game over, wait for touch to exit
 			world.stateGameover(delta);
-			if (!world.isPanning){
+            if (!world.isPanning){
                 if (Gdx.input.isTouched()) {
                     // TODO
                     // update game score to leader board here
@@ -89,7 +89,6 @@ public class LayrdScreenGame implements Screen{
 
 
                     // reset score, increment loseCount
-                    gameScore = 0;
                     loseCount++;
 
                     if(loseCount > LayrdLogic.LOSE_COUNT_WARNING){
@@ -106,6 +105,8 @@ public class LayrdScreenGame implements Screen{
 
                     // TODO
                     // may want to add play again in conjunction with exit to menu
+                    game.googleGameInterface.submiteScoreGPGS(gameScore);
+                    gameScore = 0;
                     game.setScreen(new LayrdScreenMainMenu(game));
                 }
             }
