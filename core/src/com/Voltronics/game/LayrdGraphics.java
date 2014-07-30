@@ -16,23 +16,23 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public class LayrdGraphics {
 
-	private static Map<String, Texture> spritesManager = new HashMap<String, Texture>();
+	private static Map<String, Texture> texturesManager = new HashMap<String, Texture>();
 	private static Map<String, Texture> BGsManager = new HashMap<String, Texture>();;
 	
 	
-	public static void loadSprites(String[] keys, String[] paths){
+	public static void loadTextures(String[] keys, String[] paths){
 		for(int i = 0; i < paths.length; i++)
-			loadSprite(keys[i], paths[i]);
+			loadTexture(keys[i], paths[i]);
 	}
 	
-	public static void loadSprite(String key, String path){
-		spritesManager.put(key, new Texture( Gdx.files.internal(path) ));
+	public static void loadTexture(String key, String path){
+		texturesManager.put(key, new Texture( Gdx.files.internal(path) ));
 	}
 	
 	
 	public static Texture getTexture(String textureName){
-		if(spritesManager.containsKey(textureName)){
-			return spritesManager.get(textureName);
+		if(texturesManager.containsKey(textureName)){
+			return texturesManager.get(textureName);
 		}
 		
 		// no texture found, return plain texture
