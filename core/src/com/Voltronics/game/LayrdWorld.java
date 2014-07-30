@@ -438,14 +438,10 @@ public class LayrdWorld implements ContactListener, GestureListener{
 		renderer.dispose();
 //		b2dr.dispose();
 		world.dispose();
-		player.sprite.getTexture().dispose();
 		batcher.dispose();
 
 
 	}
-
-
-
 
 
 	@Override
