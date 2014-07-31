@@ -25,6 +25,7 @@ public class LayrdScreenMainMenu implements Screen {
 	private Rectangle playBounds;
 	private Rectangle achievementBounds;
 	private Rectangle highScoreBounds;
+    private Rectangle tutorialBounds;
     private Texture backGroundImg;
     private TextureRegion backGround;
 
@@ -43,12 +44,11 @@ public class LayrdScreenMainMenu implements Screen {
 		playBounds = new Rectangle(110, 170, 240, 40);
 		highScoreBounds = new Rectangle(110,130, 240, 40);
 		achievementBounds = new Rectangle(110, 90, 240, 40);
-		
-	}
-	
-	public void handleInput()
-	{
-		System.out.println(Gdx.input.getX() + "----" + Gdx.input.getY());
+        tutorialBounds = new Rectangle(110, 50, 240, 40);
+
+
+        backGroundImg = new Texture(Gdx.files.internal("background.png"));
+        backGround = new TextureRegion(backGroundImg, 0, 0, 480, 320);
 	}
 	
 	public void update (float deltaTime) {
@@ -70,6 +70,11 @@ public class LayrdScreenMainMenu implements Screen {
 				game.googleGameInterface.getAchievementsGPGS();
 				return;
 			}
+            else if (LayrdPhysics.pointInRectangle(tutorialBounds, touchPoint.x, touchPoint.y))
+            {
+                game.setScreen(new TutorialScreen(game));
+                return;
+            }
 		}
 	}
 	
@@ -82,8 +87,7 @@ public class LayrdScreenMainMenu implements Screen {
 	}
 
     public void draw(float delta){
-        backGroundImg = new Texture(Gdx.files.internal("background.png"));
-        backGround = new TextureRegion(backGroundImg, 0, 0, 480, 320);
+
 
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -98,8 +102,7 @@ public class LayrdScreenMainMenu implements Screen {
 
         batch.enableBlending();
         batch.begin();
-        //batch.draw(img, 0, 0);
-        
+
         TextureRegion mainMenu = new TextureRegion(LayrdGraphics.getTexture("items"), 0, 224, 300, 110);
         batch.draw(mainMenu, 80, 100);
         

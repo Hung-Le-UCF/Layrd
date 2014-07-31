@@ -333,7 +333,7 @@ public class LayrdWorld implements ContactListener, GestureListener{
             mapX += delta * 60 * difficulty * 3;
         }
         else{
-            mapX += delta * 60 * difficulty;
+            mapX += delta * 60 * difficulty * 2;
         }
 
 
@@ -344,7 +344,7 @@ public class LayrdWorld implements ContactListener, GestureListener{
 
         }
         else{
-            player.setPos(player.position.x + delta * 60 * difficulty, player.position.y);
+            player.setPos(player.position.x + delta * 60 * difficulty * 2, player.position.y);
 
         }
 
@@ -424,7 +424,7 @@ public class LayrdWorld implements ContactListener, GestureListener{
         if( LayrdPhysics.pointInRectangle(player.rectBounds, x, y) ) {
             player.setPos(player.position.x + deltaX, player.position.y);
         }else{
-            player.setPos(player.position.x, player.position.y + deltaY);
+            player.setPos(player.position.x, player.position.y - deltaY);
         }
 
 

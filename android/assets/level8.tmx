@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="200" height="40" tilewidth="32" tileheight="32">
- <tileset firstgid="1" name="tilesetflat" tilewidth="32" tileheight="32">
-  <image source="tilesetflat.png" width="500" height="100"/>
+ <tileset firstgid="1" name="flatColors" tilewidth="32" tileheight="32">
+  <image source="../tilesetflat.png" width="500" height="100"/>
  </tileset>
  <layer name="background" width="200" height="40">
   <data encoding="base64" compression="zlib">
@@ -10,12 +10,12 @@
  </layer>
  <layer name="obstacles" width="200" height="40">
   <data encoding="base64" compression="zlib">
-   eJztmEGOgzAQBMn/P73HvYAVzNBTdqqkuVl0G6akKJ/jOD6O45zO21TmVT2rs1P1t0l/z+4OhPtWoh/j8/rBzUqgH+Pz+sHNSqAf4/P6wc1KoB/j8/rBzUqgH+Pz+sHNSqAf79Kdn+5AuG8lxF0kdlo1P92BcN9KiLtI7JTMX/k3Xvf7roa4i8ROyXz94EDcRWKnZL5+7MkOfhB2k9BhFv24Rj+e51M6zKIf1+jH83xKh1n04xr9eJ7/BvoxT+cuEjvpxzpZCfRjfF4/uFkJ9GN/9GMe4i4SO62MfsxD3EVip5XRj3mIu0jsJN+x2/sm7iKx06r5aSr+wxhNGuIudnaq/lbd33cFfsWPKjo76Uce/biHftRC6DBCP+7x634QOiTRj3voR3+HWQj3raQyv+pZnZ0Iu0noMEv3PlejH++iH2tD3EVip2S+fnAg7iKxUzJfPzgQd5HYadX8dAfCfSsh7iKx06r56Q6E+1ay0y6e0d2pOz/dgXDfSvRj7/x0B8J9K9GP8fnRvJH/Bvoxj36Mz+sHNyuBfozP6wc36yzPcZz/+QNEowby
+   eJztk0FuhEAQxHgC/z/lqZFyyWW1WlRupnawpT7iaRh8HsdxOo7zcggoJ7lb6pr4TivOI7z0bs3/4AT2kWMffU4K+8ixjz4nhX3k2Eefk8I+cuyjz0lhHzlPuN8p35STwj5ynnC/U74pJ4V95Dzhfqd87dhHTvM/Yx8Z9pEzdR7htY8M+8ixj32xjxz76HNS7NjH3dhHn5PCPnLso89JYR9/Z/y8mw+et48yJ4V95H0M7mUfi9mxj6vP79wHjX2s9RCu5u99hcb3sI+1HsLV/L2v0Pge9rGeb+tj6rwd7+Yu587YB+eld7OP9dgH57WP/bAPzmsfHZDvaB+c1z4yqN3swz6anBT2kWMffU4K+8ixjz4nRWMfKfbBOiZ9U04K++g9zz7WYx+959nHeuyj97zGPiZo3rGxj9RlH6xjmuYd7SPHPjKad7SPHPvIaN7RPnKe1MfEu9rHvS77YB2TviknhX3k2Eefk8I+cuyjz/nK6zjO//wC6st2AQ==
   </data>
  </layer>
  <layer name="end" width="200" height="40">
   <data encoding="base64" compression="zlib">
-   eJzt0zERACAQwLDHv2kOAR2YYEgUdOkMANxZrwPgY/6A5g9o/oDmD2j+gOYPaP6A5g9o/oDmD2j+gOYPaP6A5g9o/oDmD2j+gOYPaP6A5g9o/oDmD2j+gOYPaP6A5g9o/oDmD2j+gOYPaP6A5g9o/oDmD2j+gOYPaP6Adv7YicMAKA==
+   eJzt0zERACAQwLCXgH+1HAI6MMGQKOjSGQC4s14HwMf8Ac0f0PwBzR/Q/AHNH9D8Ac0f0PwBzR/Q/AHNH9D8Ac0f0PwBzR/Q/AHNH9D8Ac0f0PwBzR/Q/AHNH9D8Ac0f0PwBzR/Q/AHNH9D8Ac0f0PwBzR/Q/AHNH9D8Ae38sQFJPwJx
   </data>
  </layer>
 </map>
