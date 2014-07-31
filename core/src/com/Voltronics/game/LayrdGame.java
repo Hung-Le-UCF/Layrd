@@ -1,6 +1,8 @@
 package com.Voltronics.game;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 
 public class LayrdGame extends Game {
 	
@@ -29,10 +31,15 @@ public class LayrdGame extends Game {
 	
 	private void loadAssets(){
 		// load the game graphics
+		
+		LayrdGraphics.loadTexture("background", "background.png");
+		
+		LayrdGraphics.loadTexture("tutorialImg1", "tutorial1.png");
+		LayrdGraphics.loadTexture("tutorialImg2", "tutorial2.png");
+		LayrdGraphics.loadTexture("tutorialImg3", "tutorial3.png");
+		
 		LayrdGraphics.loadTexture("player", "ship.png");
 		LayrdGraphics.loadTexture("items", "items.png");
-
-		
 		
 		// load the game audio
 		

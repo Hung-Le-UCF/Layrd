@@ -14,30 +14,20 @@ public class TutorialScreen implements Screen, InputProcessor{
     private LayrdGame aGame;
     private OrthographicCamera guiCam;
     private SpriteBatch batch;
-    private Texture tutorialImg1;
-    private TextureRegion tutorial1;
-    private Texture tutorialImg2;
-    private TextureRegion tutorial2;
-    private Texture tutorialImg3;
-    private TextureRegion tutorial3;
+
     private int imgCount = 1;
+    private TextureRegion tutorialImg;
+
 
     public TutorialScreen(LayrdGame game){
 
         aGame = game;
         guiCam = new OrthographicCamera(480,320);
-        guiCam.position.set(480/2,320/2,0);
+        guiCam.position.set(480/2, 320/2, 0);
         batch = new SpriteBatch();
 
-        //  loads the different tutorial pages and sets them
-        tutorialImg1 = new Texture(Gdx.files.internal("tutorial1.png"));
-        tutorialImg2 = new Texture(Gdx.files.internal("tutorial2.png"));
-        tutorialImg3 = new Texture(Gdx.files.internal("tutorial3.png"));
-
-        tutorial1 = new TextureRegion(tutorialImg1, 0, 0, 480, 320);
-        tutorial2 = new TextureRegion(tutorialImg2, 0, 0, 480, 320);
-        tutorial3 = new TextureRegion(tutorialImg3, 0, 0, 480, 320);
-
+        tutorialImg = new TextureRegion(LayrdGraphics.getTexture("tutorialImg" + imgCount), 0, 0, 480, 320);
+        
         //  sets the input processor
         Gdx.input.setInputProcessor(this);
     }
@@ -49,9 +39,17 @@ public class TutorialScreen implements Screen, InputProcessor{
         guiCam.update();
         batch.setProjectionMatrix(guiCam.combined);
         batch.begin();
-        if(imgCount == 1)batch.draw(tutorial1, 0, 0, 480, 320);
-        else if(imgCount == 2)batch.draw(tutorial2, 0, 0, 480, 320);
-        else if(imgCount == 3)batch.draw(tutorial3, 0, 0, 480,320);
+        
+        /*
+        if(imgCount == 1)
+        	batch.draw(tutorial1, 0, 0, 480, 320);
+        else if(imgCount == 2)
+        	batch.draw(tutorial2, 0, 0, 480, 320);
+        else if(imgCount == 3)
+        	batch.draw(tutorial3, 0, 0, 480,320);
+        */
+        batch.draw(tutorialImg, 0, 0, 480, 320);
+        
         batch.end();
 
 
@@ -90,11 +88,7 @@ public class TutorialScreen implements Screen, InputProcessor{
 
     @Override
     public void dispose() {
-        tutorial3.getTexture().dispose();
-        tutorial2.getTexture().dispose();
-        tutorial1.getTexture().dispose();
-
-
+    	
     }
 
     @Override
@@ -121,7 +115,10 @@ public class TutorialScreen implements Screen, InputProcessor{
             imgCount = 1;
             aGame.setScreen(new LayrdScreenMainMenu(aGame));
         }
-        else imgCount++;
+        else {
+        	imgCount++;
+        	tutorialImg = new TextureRegion(LayrdGraphics.getTexture("tutorialImg" + imgCount), 0, 0, 480, 320);
+        }
 
         return false;
     }

@@ -18,7 +18,6 @@ public class LayrdScreenMainMenu implements Screen {
 	LayrdGame game;
 	
 	private SpriteBatch batch;
-	private Texture img;
 	private OrthographicCamera guiCam;
 	private ShapeRenderer sRender;
 	private Vector3 touchPoint;
@@ -26,7 +25,6 @@ public class LayrdScreenMainMenu implements Screen {
 	private Rectangle achievementBounds;
 	private Rectangle highScoreBounds;
     private Rectangle tutorialBounds;
-    private Texture backGroundImg;
     private TextureRegion backGround;
 
     public LayrdScreenMainMenu(LayrdGame aGame)
@@ -47,8 +45,7 @@ public class LayrdScreenMainMenu implements Screen {
         tutorialBounds = new Rectangle(110, 50, 240, 40);
 
 
-        backGroundImg = new Texture(Gdx.files.internal("background.png"));
-        backGround = new TextureRegion(backGroundImg, 0, 0, 480, 320);
+        backGround = new TextureRegion(LayrdGraphics.getTexture("background"), 0, 0, 480, 320);
 	}
 	
 	public void update (float deltaTime) {
@@ -97,7 +94,10 @@ public class LayrdScreenMainMenu implements Screen {
 
         batch.disableBlending();
         batch.begin();
+        
         batch.draw(backGround, 0, 0, 480, 320);
+        
+        
         batch.end();
 
         batch.enableBlending();
